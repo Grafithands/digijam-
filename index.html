@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiJam - Jasa Fotografer & Videografer Profesional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 2rem 100px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1.4s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+            color: #555;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+
+        .pricing-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.popular {
+            border-color: #667eea;
+        }
+
+        .pricing-card.premium {
+            border-color: #764ba2;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .popular-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .premium-badge {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.7rem 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Add-ons Section */
+        .addons-section {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .addons-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .addon-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        .addon-item:hover {
+            background: #e9ecef;
+        }
+
+        .addon-name {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .addon-price {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .addon-price.free {
+            color: #28a745;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+            padding: 80px 2rem;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Booking Section */
+        .booking {
+            padding: 80px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .booking-form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-note {
+            background: #e7f3ff;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            color: #0066cc;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 2rem;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">DigiJam</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#pricing">Harga</a></li>
+                <li><a href="#booking">Booking</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <h1>DigiJam</h1>
+        <p>Abadikan Momen Terbaik Anda dengan Sentuhan Profesional</p>
+        <a href="#booking" class="cta-button">Booking Sekarang</a>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Layanan Kami</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📷</div>
+                <h3>Fotografer Profesional</h3>
+                <p>Layanan fotografi berkualitas tinggi untuk berbagai kebutuhan Anda</p>
+                <ul class="service-features">
+                    <li>✓ Wedding Photography</li>
+                    <li>✓ Pre-wedding</li>
+                    <li>✓ Birthday & Event</li>
+                    <li>✓ Corporate Photography</li>
+                    <li>✓ Product Photography</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎥</div>
+                <h3>Videografer Profesional</h3>
+                <p>Dokumentasi video cinematic untuk momen spesial Anda</p>
+                <ul class="service-features">
+                    <li>✓ Wedding Videography</li>
+                    <li>✓ Company Profile</li>
+                    <li>✓ Event Documentation</li>
+                    <li>✓ Video Promosi</li>
+                    <li>✓ Cinematic Video</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <h2 class="section-title">Paket Harga</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 3rem;">Pilih paket yang sesuai dengan kebutuhan Anda</p>
+        
+        <div class="pricing-grid">
+            <!-- Paket A -->
+            <div class="pricing-card">
+                <div class="pricing-badge">Hemat</div>
+                <h3>PAKET A</h3>
+                <div class="price">Rp 25.000</div>
+                <ul class="pricing-features">
+                    <li>📸 5 foto + 2 menit sesi</li>
+                    <li>🎨 Resolusi HD</li>
+                </ul>
+                <a href="#booking" class="pricing-button">Pilih Paket</a>
+            </div>
+
+            <!-- Paket B -->
+            <div class="pricing-card">
+                <div class="pricing-badge">Basic</div>
+                <h3>PAKET B</h3>
+                <div class="price">Rp 50.000</div>
+                <ul class="pricing-features">
+                    <li>📸 10 foto + 8 menit sesi</li>
+                    <li>✨ Editing foto profesional</li>
+                    <li>🎨 Resolusi HD</li>
+                    <li>🔄 2 kali revisi</li>
+                    <li>☁️ Pengiriman via Google Drive</li>
+                </ul>
+                <a href="#booking" class="pricing-button">Pilih Paket</a>
+            </div>
+
+            <!-- Paket C -->
+            <div class="pricing-card popular">
+                <div class="pricing-badge popular-badge">Popular</div>
+                <h3>PAKET C</h3>
+                <div class="price">Rp 75.000</div>
+                <ul class="pricing-features">
+                    <li>📸 15 foto + 10 menit sesi</li>
+                    <li>🎥 Video pendek (30-45 detik)</li>
+                    <li>✨ Editing foto (15 foto)</li>
+                    <li>🎬 Editing video basic</li>
+                    <li>🔄 2 kali revisi</li>
+                </ul>
+                <a href="#booking" class="pricing-button">Pilih Paket</a>
+            </div>
+
+            <!-- Paket D -->
+            <div class="pricing-card premium">
+                <div class="pricing-badge premium-badge">Premium</div>
+                <h3>PAKET D</h3>
+                <div class="price">Rp 100.000</div>
+                <ul class="pricing-features">
+                    <li>📸 20 foto + 15 menit sesi</li>
+                    <li>🎥 Video cinematic (1 menit)</li>
+                    <li>✨ Editing foto (20 foto)</li>
+                    <li>🎬 Editing video premium</li>
+                    <li>🎵 Musik + transition</li>
+                    <li>🔄 3 kali revisi</li>
+                </ul>
+                <a href="#booking" class="pricing-button">Pilih Paket</a>
+            </div>
+        </div>
+
+        <!-- Add-ons -->
+        <div class="addons-section">
+            <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">➕ Add-ons (Opsional)</h3>
+            <div class="addons-grid">
+                <div class="addon-item">
+                    <span class="addon-name">Extra editing foto (5 foto)</span>
+                    <span class="addon-price">Rp 10.000</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Extra durasi video (30 detik)</span>
+                    <span class="addon-price">Rp 15.000</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">File tanpa watermark</span>
+                    <span class="addon-price free">Gratis</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Cepat jadi (express 1 hari)</span>
+                    <span class="addon-price">Rp 20.000</span>
+                </div>
+                <div class="addon-item">
+                    <span class="addon-name">Tambah soft file (per foto)</span>
+                    <span class="addon-price">Rp 2.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2 class="section-title">Mengapa Memilih DigiJam?</h2>
+            <p>DigiJam adalah layanan profesional fotografer dan videografer yang berpengalaman dalam mengabadikan momen-momen berharga Anda dengan harga yang terjangkau.</p>
+            <p>Kami menggunakan peralatan profesional dan teknik terkini untuk memastikan setiap momen terdokumentasi dengan sempurna, hasil berkualitas HD dengan editing yang rapi.</p>
+            <p>Dengan berbagai pilihan paket mulai dari Rp 25.000, kami berkomitmen memberikan layanan terbaik untuk semua kebutuhan dokumentasi Anda.</p>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <h2 class="section-title">Booking Sekarang</h2>
+        <div class="booking-form-container">
+            <div class="form-note">
+                📝 Silakan isi form booking di bawah ini. Kami akan menghubungi Anda segera untuk konfirmasi dan detail lebih lanjut.
+            </div>
+            
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSepkD8geI8BKvPDy3QA-VXnP7oCDB-7dcxSXVJxbPM0jtr2Qg/viewform?embedded=true" 
+                    width="100%" 
+                    height="2100" 
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0">
+                Memuat…
+            </iframe>
+            
+            <p style="margin-top: 1rem; color: #666;">
+                Atau hubungi kami langsung melalui WhatsApp di bawah ini
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Hubungi Kami</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="contact-icon">📱</span>
+                <div>
+                    <strong>WhatsApp</strong><br>
+                    <a href="https://wa.me/628XXXXXXXXXX" style="color: white;">+62 8XX-XXXX-XXXX</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">📧</span>
+                <div>
+                    <strong>Email</strong><br>
+                    <a href="mailto:info@digijam.com" style="color: white;">info@digijam.com</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">📷</span>
+                <div>
+                    <strong>Instagram</strong><br>
+                    <a href="https://instagram.com/digijam" style="color: white;">@digijam</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 DigiJam. All rights reserved.</p>
+    </footer>
+</body>
+</html>
