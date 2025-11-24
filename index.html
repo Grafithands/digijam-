@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DigiJam - Jasa Fotografer & Videografer Profesional</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -345,6 +346,11 @@
             margin: 0 auto;
         }
 
+        /* Hide email info in Google Form */
+        .booking-form-container iframe {
+            overflow: hidden;
+        }
+
         .form-note {
             background: #e7f3ff;
             padding: 1rem;
@@ -376,7 +382,16 @@
         }
 
         .contact-icon {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icon i {
+            color: white;
         }
 
         /* Footer */
@@ -437,7 +452,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <h1>DigiJam</h1>
-        <p>Abadikan Momen Terbaik Anda dengan Sentuhan Profesional</p>
+        <p>Your Moments, Perfectly Captured</p>
         <a href="#booking" class="cta-button">Booking Sekarang</a>
     </section>
 
@@ -446,28 +461,16 @@
         <h2 class="section-title">Layanan Kami</h2>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">📷</div>
-                <h3>Fotografer Profesional</h3>
-                <p>Layanan fotografi berkualitas tinggi untuk berbagai kebutuhan Anda</p>
+                <div class="service-icon">📷🎥</div>
+                <h3>Fotografer & Videografer</h3>
+                <p>Self Photo Studio and Fashion or Lookbook Photoshoot</p>
                 <ul class="service-features">
-                    <li>✓ Wedding Photography</li>
-                    <li>✓ Pre-wedding</li>
-                    <li>✓ Birthday & Event</li>
-                    <li>✓ Corporate Photography</li>
+                    <li>✓ Self Photo Studio</li>
+                    <li>✓ Fashion Photoshoot</li>
+                    <li>✓ Lookbook Photoshoot</li>
                     <li>✓ Product Photography</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">🎥</div>
-                <h3>Videografer Profesional</h3>
-                <p>Dokumentasi video cinematic untuk momen spesial Anda</p>
-                <ul class="service-features">
-                    <li>✓ Wedding Videography</li>
-                    <li>✓ Company Profile</li>
-                    <li>✓ Event Documentation</li>
-                    <li>✓ Video Promosi</li>
-                    <li>✓ Cinematic Video</li>
+                    <li>✓ Content Creation</li>
+                    <li>✓ Video Cinematic</li>
                 </ul>
             </div>
         </div>
@@ -569,10 +572,10 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="about-content">
-            <h2 class="section-title">Mengapa Memilih DigiJam?</h2>
-            <p>DigiJam adalah layanan profesional fotografer dan videografer yang berpengalaman dalam mengabadikan momen-momen berharga Anda dengan harga yang terjangkau.</p>
-            <p>Kami menggunakan peralatan profesional dan teknik terkini untuk memastikan setiap momen terdokumentasi dengan sempurna, hasil berkualitas HD dengan editing yang rapi.</p>
-            <p>Dengan berbagai pilihan paket mulai dari Rp 25.000, kami berkomitmen memberikan layanan terbaik untuk semua kebutuhan dokumentasi Anda.</p>
+            <h2 class="section-title">Tentang DigiJam</h2>
+            <p>DigiJam adalah layanan jasa fotografi dan videografi yang menyediakan dokumentasi profesional dengan fokus pada self photo studio, fashion photoshoot, dan lookbook photoshoot.</p>
+            <p>Menggunakan peralatan kamera digital berkualitas tinggi, DigiJam menghadirkan hasil gambar yang jernih, kreatif, dan estetik. Layanan ini juga menyediakan editing foto dan video untuk memastikan hasil akhir terlihat maksimal dan siap digunakan untuk keperluan pribadi maupun promosi konten media sosial Anda.</p>
+            <p>Kami melayani area <strong>Kranji, Bekasi Barat, Jawa Barat</strong> dengan berbagai pilihan paket mulai dari Rp 25.000. Kami berkomitmen memberikan layanan terbaik untuk semua kebutuhan dokumentasi Anda.</p>
         </div>
     </section>
 
@@ -604,24 +607,39 @@
         <h2 class="section-title">Hubungi Kami</h2>
         <div class="contact-info">
             <div class="contact-item">
-                <span class="contact-icon">📱</span>
+                <span class="contact-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </span>
                 <div>
                     <strong>WhatsApp</strong><br>
-                    <a href="https://wa.me/628XXXXXXXXXX" style="color: white;">+62 8XX-XXXX-XXXX</a>
+                    <a href="https://wa.me/6285723668508" style="color: white;">+62 857-2366-8508</a>
                 </div>
             </div>
             <div class="contact-item">
-                <span class="contact-icon">📧</span>
+                <span class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </span>
                 <div>
                     <strong>Email</strong><br>
-                    <a href="mailto:info@digijam.com" style="color: white;">info@digijam.com</a>
+                    <a href="mailto:dgijamdgjum@gmail.com" style="color: white;">dgijamdgjum@gmail.com</a>
                 </div>
             </div>
             <div class="contact-item">
-                <span class="contact-icon">📷</span>
+                <span class="contact-icon">
+                    <i class="fab fa-instagram"></i>
+                </span>
                 <div>
                     <strong>Instagram</strong><br>
-                    <a href="https://instagram.com/digijam" style="color: white;">@digijam</a>
+                    <a href="https://instagram.com/digijam__" style="color: white;">@digijam__</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">
+                    <i class="fab fa-tiktok"></i>
+                </span>
+                <div>
+                    <strong>TikTok</strong><br>
+                    <a href="https://tiktok.com/@digijam_" style="color: white;">@digijam_</a>
                 </div>
             </div>
         </div>
@@ -629,7 +647,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 DigiJam. All rights reserved.</p>
+        <p>&copy; 2024 DigiJam. All rights reserved. Melayani area Kranji, Bekasi Barat, Jawa Barat</p>
     </footer>
 </body>
 </html>
