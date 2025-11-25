@@ -92,6 +92,25 @@
             transform: rotate(-45deg) translate(7px, -7px);
         }
 
+        /* Mobile Menu Overlay */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -532,24 +551,33 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 70%;
+                width: 75%;
+                max-width: 300px;
                 height: 100vh;
                 background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 2rem;
+                gap: 2.5rem;
                 transition: right 0.3s ease;
                 z-index: 1000;
                 box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+                padding: 2rem;
             }
 
             .nav-links.active {
                 right: 0;
             }
 
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
             .nav-links a {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.5rem;
             }
 
             nav {
@@ -664,6 +692,11 @@
 
             .nav-links {
                 width: 80%;
+                max-width: 280px;
+            }
+
+            .nav-links a {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -687,6 +720,9 @@
             </ul>
         </nav>
     </header>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -930,15 +966,29 @@
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             const menuToggle = document.querySelector('.menu-toggle');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
             navLinks.classList.toggle('active');
             menuToggle.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
         }
 
         function closeMenu() {
             const navLinks = document.getElementById('navLinks');
             const menuToggle = document.querySelector('.menu-toggle');
+            const menuOverlay = document.getElementById('menuOverlay');
+            
             navLinks.classList.remove('active');
             menuToggle.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
 
         function sendToWhatsApp(event) {
