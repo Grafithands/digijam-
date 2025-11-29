@@ -42,9 +42,10 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             font-weight: bold;
             z-index: 1001;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -776,6 +777,9 @@
         }
 
         @media (max-width: 480px) {
+            nav {
+                padding: 0 1rem;
+            }
             .hero h1 {
                 font-size: 2rem;
             }
