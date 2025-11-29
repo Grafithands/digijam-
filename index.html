@@ -347,11 +347,6 @@
         .pricing-card.popular {
             border-color: #667eea;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-            transform: scale(1.05);
-        }
-
-        .pricing-card.popular:hover {
-            transform: translateY(-15px) scale(1.05);
         }
 
         .pricing-card.premium {
@@ -817,13 +812,18 @@
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .fade-in:nth-child(1) { transition-delay: 0.1s; }
+        .fade-in:nth-child(2) { transition-delay: 0.2s; }
+        .fade-in:nth-child(3) { transition-delay: 0.3s; }
+        .fade-in:nth-child(4) { transition-delay: 0.4s; }
 
         .slide-left {
             opacity: 0;
@@ -1360,13 +1360,17 @@
         function handleScrollAnimations() {
             const elements = document.querySelectorAll('.fade-in, .slide-left, .slide-right');
             
-            elements.forEach(element => {
+            elements.forEach((element, index) => {
                 const elementTop = element.getBoundingClientRect().top;
                 const elementBottom = element.getBoundingClientRect().bottom;
                 const windowHeight = window.innerHeight;
                 
-                if (elementTop < windowHeight - 100 && elementBottom > 0) {
-                    element.classList.add('visible');
+                // Trigger animation when element is in viewport
+                if (elementTop < windowHeight - 50 && elementBottom > 0) {
+                    // Add slight delay for staggered effect
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, index * 50);
                 }
             });
         }
