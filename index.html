@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+.whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+            }
+
+            .scroll-top {
+                bottom: 85px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +31,7 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         /* Header */
@@ -42,7 +57,7 @@
         }
 
         .logo {
-            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            font-size: 1.8rem;
             font-weight: bold;
             z-index: 1001;
             white-space: nowrap;
@@ -301,6 +316,8 @@
             position: relative;
             border: 2px solid #f0f0f0;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .pricing-card::before {
@@ -313,6 +330,8 @@
             background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.05), transparent);
             transform: rotate(45deg);
             transition: all 0.6s;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .pricing-card:hover::before {
@@ -349,6 +368,7 @@
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: bold;
+            z-index: 10;
         }
 
         .popular-badge {
@@ -363,6 +383,8 @@
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: #333;
+            position: relative;
+            z-index: 1;
         }
 
         .price {
@@ -370,12 +392,20 @@
             font-weight: bold;
             color: #667eea;
             margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .pricing-features {
             list-style: none;
             text-align: left;
             margin-bottom: 2rem;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
         }
 
         .pricing-features li {
@@ -398,11 +428,21 @@
             font-weight: bold;
             transition: transform 0.3s, box-shadow 0.3s;
             touch-action: manipulation;
+            cursor: pointer;
+            margin-top: auto;
+            position: relative;
+            z-index: 10;
+            border: none;
+            outline: none;
         }
 
         .pricing-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .pricing-button:active {
+            transform: translateY(-1px);
         }
 
         /* Add-ons Section */
@@ -628,6 +668,185 @@
             color: white;
         }
 
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(37, 211, 102, 0.8);
+            }
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Testimonial Section */
+        .testimonials {
+            padding: 80px 2rem;
+            background: white;
+        }
+
+        .testimonial-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: #667eea;
+            opacity: 0.3;
+            line-height: 0;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-info h4 {
+            margin: 0;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .testimonial-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
         /* Footer */
         footer {
             background: #333;
@@ -689,6 +908,10 @@
 
             nav {
                 padding: 0 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.4rem;
             }
 
             .hero h1 {
@@ -780,6 +1003,10 @@
             nav {
                 padding: 0 1rem;
             }
+
+            .logo {
+                font-size: 1.3rem;
+            }
             .hero h1 {
                 font-size: 2rem;
             }
@@ -851,10 +1078,10 @@
 
     <!-- Services Section -->
     <section id="services" class="services">
-        <h2 class="section-title">Layanan Kami</h2>
-        <p class="section-subtitle">Dokumentasi profesional dengan hasil berkualitas tinggi untuk kebutuhan Anda</p>
+        <h2 class="section-title fade-in">Layanan Kami</h2>
+        <p class="section-subtitle fade-in">Dokumentasi profesional dengan hasil berkualitas tinggi untuk kebutuhan Anda</p>
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card fade-in">
                 <div class="service-icon">📷🎥</div>
                 <h3>Fotografer & Videografer</h3>
                 <p>Self Photo Studio and Fashion or Lookbook Photoshoot</p>
@@ -872,12 +1099,12 @@
 
     <!-- Pricing Section -->
     <section id="pricing" class="pricing">
-        <h2 class="section-title">Paket Harga</h2>
-        <p class="section-subtitle">Pilih paket yang sesuai dengan kebutuhan dan budget Anda</p>
+        <h2 class="section-title fade-in">Paket Harga</h2>
+        <p class="section-subtitle fade-in">Pilih paket yang sesuai dengan kebutuhan dan budget Anda</p>
         
         <div class="pricing-grid">
             <!-- Paket A -->
-            <div class="pricing-card">
+            <div class="pricing-card fade-in">
                 <div class="pricing-badge">Hemat</div>
                 <h3>PAKET A</h3>
                 <div class="price">Rp 25.000</div>
@@ -889,7 +1116,7 @@
             </div>
 
             <!-- Paket B -->
-            <div class="pricing-card">
+            <div class="pricing-card fade-in">
                 <div class="pricing-badge">Basic</div>
                 <h3>PAKET B</h3>
                 <div class="price">Rp 50.000</div>
@@ -904,7 +1131,7 @@
             </div>
 
             <!-- Paket C -->
-            <div class="pricing-card popular">
+            <div class="pricing-card popular fade-in">
                 <div class="pricing-badge popular-badge">Popular</div>
                 <h3>PAKET C</h3>
                 <div class="price">Rp 75.000</div>
@@ -919,7 +1146,7 @@
             </div>
 
             <!-- Paket D -->
-            <div class="pricing-card premium">
+            <div class="pricing-card premium fade-in">
                 <div class="pricing-badge premium-badge">Premium</div>
                 <h3>PAKET D</h3>
                 <div class="price">Rp 100.000</div>
@@ -966,17 +1193,64 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="about-content">
-            <h2 class="section-title">Tentang DigiJam</h2>
-            <p>DigiJam adalah layanan jasa fotografi dan videografi yang menyediakan dokumentasi profesional dengan fokus pada self photo studio, fashion photoshoot, dan lookbook photoshoot.</p>
-            <p>Menggunakan peralatan kamera digital berkualitas tinggi, DigiJam menghadirkan hasil gambar yang jernih, kreatif, dan estetik. Layanan ini juga menyediakan editing foto dan video untuk memastikan hasil akhir terlihat maksimal dan siap digunakan untuk keperluan pribadi maupun promosi konten media sosial Anda.</p>
-            <p>Kami melayani area <strong>Kranji, Bekasi Barat, Jawa Barat</strong> dengan berbagai pilihan paket mulai dari Rp 25.000. Kami berkomitmen memberikan layanan terbaik untuk semua kebutuhan dokumentasi Anda.</p>
+            <h2 class="section-title fade-in">Tentang DigiJam</h2>
+            <p class="fade-in">DigiJam adalah layanan jasa fotografi dan videografi yang menyediakan dokumentasi profesional dengan fokus pada self photo studio, fashion photoshoot, dan lookbook photoshoot.</p>
+            <p class="fade-in">Menggunakan peralatan kamera digital berkualitas tinggi, DigiJam menghadirkan hasil gambar yang jernih, kreatif, dan estetik. Layanan ini juga menyediakan editing foto dan video untuk memastikan hasil akhir terlihat maksimal dan siap digunakan untuk keperluan pribadi maupun promosi konten media sosial Anda.</p>
+            <p class="fade-in">Kami melayani area <strong>Kranji, Bekasi Barat, Jawa Barat</strong> dengan berbagai pilihan paket mulai dari Rp 25.000. Kami berkomitmen memberikan layanan terbaik untuk semua kebutuhan dokumentasi Anda.</p>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonials">
+        <h2 class="section-title fade-in">Testimoni Pelanggan</h2>
+        <p class="section-subtitle fade-in">Apa kata mereka yang sudah menggunakan jasa DigiJam</p>
+        
+        <div class="testimonial-grid">
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">Hasilnya bagus banget! Foto-fotonya aesthetic dan sesuai sama yang aku mau. Harga juga terjangkau untuk anak muda. Recommended!</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">A</div>
+                    <div class="testimonial-info">
+                        <h4>Anjani Putri</h4>
+                        <p>Fashion Photoshoot</p>
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">Pelayanannya cepat dan profesional. Video cinematic nya keren abis, hasil editing nya juga rapi. Puas banget pake jasa DigiJam!</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">R</div>
+                    <div class="testimonial-info">
+                        <h4>Rizki Aditya</h4>
+                        <p>Video Cinematic</p>
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card fade-in">
+                <div class="testimonial-quote">"</div>
+                <p class="testimonial-text">Worth it banget! Dengan harga segitu dapet hasil yang memuaskan. Cocok buat yang mau foto produk atau konten IG. Thank you DigiJam!</p>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">S</div>
+                    <div class="testimonial-info">
+                        <h4>Siti Nurhaliza</h4>
+                        <p>Product Photography</p>
+                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Booking Section -->
     <section id="booking" class="booking">
-        <h2 class="section-title">Booking Sekarang</h2>
-        <div class="booking-form-container">
+        <h2 class="section-title fade-in">Booking Sekarang</h2>
+        <div class="booking-form-container fade-in">
             <div class="form-note">
                 📝 Isi form di bawah ini, lalu klik "Kirim ke WhatsApp" untuk booking langsung!
             </div>
@@ -1082,6 +1356,51 @@
     </section>
 
     <script>
+        // Scroll Animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in, .slide-left, .slide-right');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100 && elementBottom > 0) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/Hide Scroll to Top Button
+        function handleScrollTop() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        }
+
+        // Initialize on scroll
+        window.addEventListener('scroll', () => {
+            handleScrollAnimations();
+            handleScrollTop();
+        });
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            handleScrollAnimations();
+        });
+
+        // Hamburger Menu Functions
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             const menuToggle = document.querySelector('.menu-toggle');
@@ -1205,5 +1524,15 @@
     <footer>
         <p>&copy; 2024 DigiJam. All rights reserved. Melayani area Kranji, Bekasi Barat, Jawa Barat</p>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/6285723668508?text=Halo%20DigiJam,%20saya%20mau%20tanya%20tentang%20layanan%20foto/video" class="whatsapp-float" target="_blank" title="Chat WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 </body>
 </html>
