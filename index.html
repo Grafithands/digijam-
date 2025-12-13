@@ -1,601 +1,508 @@
-.whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 28px;
-            }
-
-            .scroll-top {
-                bottom: 85px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>DigiJam - Jasa Fotografer & Videografer Profesional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiJam - Fotografer & Videografer Profesional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --dark: #1a1a2e;
         }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
-
-        /* Header */
+        
+        /* Header Glass Effect */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
         }
-
+        
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+        }
+        
         nav {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 2rem;
-            position: relative;
+            padding: 1rem 2rem;
         }
-
+        
         .logo {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: bold;
-            z-index: 1001;
-            white-space: nowrap;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s;
         }
-
+        
+        .logo:hover { transform: scale(1.05); }
+        
+        header.scrolled .logo { -webkit-text-fill-color: var(--primary); }
+        
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
-
+        
         .nav-links a {
             color: white;
             text-decoration: none;
-            transition: opacity 0.3s;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s;
         }
-
-        .nav-links a:hover {
-            opacity: 0.8;
+        
+        header.scrolled .nav-links a { color: var(--dark); }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
         }
-
-        /* Hamburger Menu */
+        
+        .nav-links a:hover::after { width: 100%; }
+        
         .menu-toggle {
             display: none;
             flex-direction: column;
             gap: 5px;
             cursor: pointer;
-            z-index: 1001;
         }
-
+        
         .menu-toggle span {
-            width: 25px;
+            width: 28px;
             height: 3px;
             background: white;
             border-radius: 3px;
             transition: all 0.3s;
         }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(7px, 7px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Mobile Menu Overlay */
-        .menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .menu-overlay.active {
-            display: block;
-            opacity: 1;
-        }
-
+        
+        header.scrolled .menu-toggle span { background: var(--dark); }
+        
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+        
         /* Hero Section */
         .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 180px 2rem 120px;
-            text-align: center;
-            margin-top: 60px;
             position: relative;
             overflow: hidden;
+            padding: 2rem;
         }
-
-        .hero::before {
-            content: '';
+        
+        .floating-camera {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            opacity: 0.3;
+            font-size: 15rem;
+            opacity: 0.05;
+            animation: rotate 20s linear infinite;
         }
-
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
         .hero-content {
-            position: relative;
-            z-index: 1;
+            text-align: center;
+            color: white;
+            z-index: 10;
+            max-width: 900px;
         }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 1.2s;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
+        
         .hero-badge {
             display: inline-block;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            padding: 0.5rem 1.5rem;
+            padding: 0.8rem 2rem;
             border-radius: 50px;
             margin-bottom: 2rem;
-            font-size: 0.9rem;
-            animation: fadeInUp 0.8s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInDown 1s;
         }
-
+        
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            letter-spacing: -2px;
+            animation: fadeInUp 1.2s;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            animation: fadeInUp 1.4s;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1.6s;
+        }
+        
         .cta-button {
-            display: inline-block;
-            background: white;
-            color: #667eea;
             padding: 1.2rem 3rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1.4s;
-            touch-action: manipulation;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-weight: 600;
+            transition: all 0.3s;
         }
-
+        
+        .cta-button.primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.3);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
         .cta-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.4);
         }
-
-        /* Services Section */
-        .services {
-            padding: 80px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        
+        /* Sections */
+        .section {
+            padding: 120px 2rem;
         }
-
+        
+        .section.gray { background: #f8f9fa; }
+        
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            color: #333;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-            width: 100%;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            margin: 1rem auto 2rem;
-            border-radius: 2px;
-        }
-
+        
         .section-subtitle {
             text-align: center;
             color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            max-width: 600px;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
-
+        
+        /* Service Cards */
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .service-card p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .service-features {
-            list-style: none;
-            text-align: left;
-            color: #555;
-        }
-
-        .service-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .service-features li:last-child {
-            border-bottom: none;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-        }
-
-        .pricing-grid {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
-
-        .pricing-card {
+        
+        .service-card {
             background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
             position: relative;
-            border: 2px solid #f0f0f0;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
-
-        .pricing-card::before {
+        
+        .service-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.05), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            pointer-events: none;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s;
         }
-
-        .pricing-card:hover::before {
-            left: 100%;
+        
+        .service-card:hover::before { transform: scaleX(1); }
+        
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
         }
-
-        .pricing-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
-        }
-
-        .pricing-card.popular {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-        }
-
-        .pricing-card.premium {
-            border-color: #764ba2;
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: #667eea;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            z-index: 10;
-        }
-
-        .popular-badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .premium-badge {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-            position: relative;
-            z-index: 1;
-        }
-
-        .price {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
+        
+        .service-icon {
+            font-size: 4rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
+            transition: all 0.3s;
         }
-
-        .pricing-features {
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .service-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .service-features {
             list-style: none;
-            text-align: left;
-            margin-bottom: 2rem;
-            min-height: 200px;
+            margin-top: 1.5rem;
+        }
+        
+        .service-features li {
+            padding: 0.8rem 0;
+            color: #555;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s;
+        }
+        
+        .service-features li:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+        
+        /* Pricing Cards */
+        .pricing-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s;
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            position: relative;
-            z-index: 1;
         }
-
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            right: 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+        
         .pricing-features li {
-            padding: 0.7rem 0;
+            padding: 0.8rem 0;
             color: #555;
             border-bottom: 1px solid #eee;
         }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
+        
         .pricing-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 0.8rem 2rem;
+            padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            touch-action: manipulation;
-            cursor: pointer;
-            margin-top: auto;
-            position: relative;
-            z-index: 10;
-            border: none;
-            outline: none;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
         }
-
+        
         .pricing-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
         }
-
-        .pricing-button:active {
-            transform: translateY(-1px);
-        }
-
-        /* Add-ons Section */
-        .addons-section {
-            max-width: 800px;
-            margin: 3rem auto 0;
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .addons-grid {
+        
+        /* Testimonial Cards */
+        .testimonial-grid {
+            max-width: 1400px;
+            margin: 0 auto;
             display: grid;
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
         }
-
-        .addon-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            transition: background 0.3s;
-        }
-
-        .addon-item:hover {
-            background: #e9ecef;
-        }
-
-        .addon-name {
-            color: #333;
-            font-weight: 500;
-        }
-
-        .addon-price {
-            color: #667eea;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .addon-price.free {
-            color: #28a745;
-        }
-
-        /* About Section */
-        .about {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 80px 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about::before {
-            content: '📸';
-            position: absolute;
-            font-size: 15rem;
-            opacity: 0.03;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-content p {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        /* Booking Section */
-        .booking {
-            padding: 80px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .booking-form-container {
+        
+        .testimonial-card {
             background: white;
             padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            max-width: 600px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .testimonial-quote {
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            line-height: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Booking Form */
+        .booking-form-container {
+            max-width: 700px;
             margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             border: 2px solid #f0f0f0;
         }
-
-        /* Form Styles */
+        
         .form-group {
             margin-bottom: 1.5rem;
-            text-align: left;
         }
-
+        
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: #333;
+            color: var(--dark);
         }
-
+        
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 1rem;
+            padding: 1rem 1.5rem;
             border: 2px solid #e0e0e0;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 1rem;
-            font-family: inherit;
             transition: all 0.3s;
             background: #fafafa;
+            font-family: inherit;
         }
-
+        
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--primary);
             background: white;
             box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
         }
-
+        
         .checkbox-group {
             display: flex;
             flex-direction: column;
             gap: 0.8rem;
         }
-
+        
         .checkbox-label {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-weight: normal;
             cursor: pointer;
         }
-
-        .checkbox-label input[type="checkbox"] {
-            width: auto;
-            cursor: pointer;
-        }
-
+        
         .submit-button {
             width: 100%;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            background: linear-gradient(135deg, #25D366, #128C7E);
             color: white;
-            padding: 1.2rem 2rem;
+            padding: 1.3rem 2rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
@@ -603,39 +510,32 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.8rem;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            gap: 1rem;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
         }
-
+        
         .submit-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
         }
-
-        .submit-button:active {
-            transform: translateY(-1px);
-        }
-
+        
         .form-note {
-            background: linear-gradient(135deg, #e7f3ff 0%, #d4e9ff 100%);
+            background: linear-gradient(135deg, #e7f3ff, #d4e9ff);
             padding: 1.2rem;
-            border-radius: 12px;
+            border-radius: 15px;
             margin-bottom: 2rem;
             color: #0066cc;
             border-left: 4px solid #0066cc;
-            font-size: 0.95rem;
         }
-
+        
         /* Contact Section */
         .contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 80px 2rem;
             text-align: center;
         }
-
+        
         .contact-info {
             display: flex;
             justify-content: center;
@@ -643,210 +543,17 @@
             flex-wrap: wrap;
             margin-top: 2rem;
         }
-
+        
         .contact-item {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-
+        
         .contact-icon {
             font-size: 2.5rem;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
-
-        .contact-icon i {
-            color: white;
-        }
-
-        /* WhatsApp Floating Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            }
-            50% {
-                box-shadow: 0 4px 30px rgba(37, 211, 102, 0.8);
-            }
-        }
-
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 999;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .scroll-top.show {
-            display: flex;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
-        }
-
-        /* Testimonial Section */
-        .testimonials {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .testimonial-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .testimonial-quote {
-            font-size: 3rem;
-            color: #667eea;
-            opacity: 0.3;
-            line-height: 0;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: #555;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .testimonial-info h4 {
-            margin: 0;
-            color: #333;
-            font-size: 1rem;
-        }
-
-        .testimonial-info p {
-            margin: 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-stars {
-            color: #ffc107;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in:nth-child(1) { transition-delay: 0.1s; }
-        .fade-in:nth-child(2) { transition-delay: 0.2s; }
-        .fade-in:nth-child(3) { transition-delay: 0.3s; }
-        .fade-in:nth-child(4) { transition-delay: 0.4s; }
-
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .slide-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .slide-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
+        
         /* Footer */
         footer {
             background: #333;
@@ -854,198 +561,115 @@
             text-align: center;
             padding: 2rem;
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        /* Float Buttons */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            animation: pulse 2s infinite;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
         }
-
+        
+        .whatsapp-float:hover { transform: scale(1.15); }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(37, 211, 102, 0.5); }
+            50% { box-shadow: 0 5px 40px rgba(37, 211, 102, 0.8); }
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 110px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .scroll-top.show { display: flex; }
+        .scroll-top:hover { transform: translateY(-5px); }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-
+            .menu-toggle { display: flex; }
+            
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 75%;
-                max-width: 300px;
+                width: 80%;
+                max-width: 350px;
                 height: 100vh;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, var(--primary), var(--secondary));
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 2.5rem;
-                transition: right 0.3s ease;
+                transition: right 0.4s;
                 z-index: 1000;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-                padding: 2rem;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
             }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                font-size: 1.3rem;
-                display: block;
-                padding: 0.5rem;
-            }
-
-            nav {
-                padding: 0 1.5rem;
-            }
-
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .hero-badge {
-                font-size: 0.8rem;
-                padding: 0.4rem 1.2rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
+            
+            .nav-links.active { right: 0; }
+            .nav-links a { font-size: 1.4rem; color: white !important; }
+            
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.2rem; }
+            .section-title { font-size: 2.2rem; }
+            
             .services-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .hero {
-                padding: 140px 1.5rem 100px;
-            }
-
-            .services,
-            .pricing,
-            .about,
-            .booking,
-            .contact {
-                padding: 60px 1.5rem;
-            }
-
-            .booking-form-container {
-                padding: 1.5rem;
-            }
-
-            .contact-info {
-                gap: 2rem;
-            }
-
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
-            }
-
-            .cta-button,
-            .pricing-button,
-            .submit-button {
-                padding: 0.9rem 2rem;
-                font-size: 1rem;
-            }
-
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
-                font-size: 16px; /* Prevent zoom on iOS */
-            }
-
-            .pricing-card {
-                padding: 1.5rem;
-            }
-
-            .price {
-                font-size: 1.8rem;
-            }
-
-            .addons-section {
-                padding: 1.5rem;
-            }
-
-            .addon-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
+            .pricing-grid,
+            .testimonial-grid { grid-template-columns: 1fr; }
+            
+            .cta-buttons { flex-direction: column; }
+            .contact-info { flex-direction: column; align-items: center; }
         }
-
+        
         @media (max-width: 480px) {
-            nav {
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .service-icon {
-                font-size: 2.5rem;
-            }
-
-            .contact-icon {
-                font-size: 2rem;
-            }
-
-            .form-note {
-                font-size: 0.9rem;
-                padding: 0.8rem;
-            }
-
-            .nav-links {
-                width: 80%;
-                max-width: 280px;
-            }
-
-            .nav-links a {
-                font-size: 1.2rem;
-            }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 1.8rem; }
+            nav { padding: 1rem 1.5rem; }
+            .booking-form-container { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <header id="header">
         <nav>
             <div class="logo">DigiJam</div>
             <div class="menu-toggle" onclick="toggleMenu()">
@@ -1057,34 +681,33 @@
                 <li><a href="#home" onclick="closeMenu()">Home</a></li>
                 <li><a href="#services" onclick="closeMenu()">Layanan</a></li>
                 <li><a href="#pricing" onclick="closeMenu()">Harga</a></li>
+                <li><a href="#testimonials" onclick="closeMenu()">Testimoni</a></li>
                 <li><a href="#booking" onclick="closeMenu()">Booking</a></li>
-                <li><a href="#contact" onclick="closeMenu()">Kontak</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-
-    <!-- Hero Section -->
     <section id="home" class="hero">
+        <div class="floating-camera">📸</div>
         <div class="hero-content">
             <div class="hero-badge">✨ Professional Photography & Videography</div>
             <h1>DigiJam</h1>
             <p>Your Moments, Perfectly Captured</p>
-            <a href="#booking" class="cta-button">Booking Sekarang</a>
+            <div class="cta-buttons">
+                <a href="#booking" class="cta-button primary">Booking Sekarang</a>
+                <a href="#services" class="cta-button secondary">Lihat Layanan</a>
+            </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2 class="section-title fade-in">Layanan Kami</h2>
-        <p class="section-subtitle fade-in">Dokumentasi profesional dengan hasil berkualitas tinggi untuk kebutuhan Anda</p>
+    <section id="services" class="section gray">
+        <h2 class="section-title">Layanan Kami</h2>
+        <p class="section-subtitle">Dokumentasi profesional dengan hasil berkualitas tinggi</p>
         <div class="services-grid">
-            <div class="service-card fade-in">
+            <div class="service-card">
                 <div class="service-icon">📷🎥</div>
                 <h3>Fotografer & Videografer</h3>
-                <p>Self Photo Studio and Fashion or Lookbook Photoshoot</p>
+                <p>Self Photo Studio, Fashion & Lookbook Photoshoot</p>
                 <ul class="service-features">
                     <li>✓ Self Photo Studio</li>
                     <li>✓ Fashion Photoshoot</li>
@@ -1097,14 +720,11 @@
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <h2 class="section-title fade-in">Paket Harga</h2>
-        <p class="section-subtitle fade-in">Pilih paket yang sesuai dengan kebutuhan dan budget Anda</p>
-        
+    <section id="pricing" class="section">
+        <h2 class="section-title">Paket Harga</h2>
+        <p class="section-subtitle">Pilih paket yang sesuai dengan kebutuhan Anda</p>
         <div class="pricing-grid">
-            <!-- Paket A -->
-            <div class="pricing-card fade-in">
+            <div class="pricing-card">
                 <div class="pricing-badge">Hemat</div>
                 <h3>PAKET A</h3>
                 <div class="price">Rp 25.000</div>
@@ -1114,9 +734,8 @@
                 </ul>
                 <a href="#booking" class="pricing-button">Pilih Paket</a>
             </div>
-
-            <!-- Paket B -->
-            <div class="pricing-card fade-in">
+            
+            <div class="pricing-card">
                 <div class="pricing-badge">Basic</div>
                 <h3>PAKET B</h3>
                 <div class="price">Rp 50.000</div>
@@ -1125,35 +744,33 @@
                     <li>✨ Editing foto profesional</li>
                     <li>🎨 Resolusi HD</li>
                     <li>🔄 2 kali revisi</li>
-                    <li>☁️ Pengiriman via Google Drive</li>
+                    <li>☁️ Google Drive delivery</li>
                 </ul>
                 <a href="#booking" class="pricing-button">Pilih Paket</a>
             </div>
-
-            <!-- Paket C -->
-            <div class="pricing-card popular fade-in">
-                <div class="pricing-badge popular-badge">Popular</div>
+            
+            <div class="pricing-card">
+                <div class="pricing-badge">Popular</div>
                 <h3>PAKET C</h3>
                 <div class="price">Rp 75.000</div>
                 <ul class="pricing-features">
-                    <li>📸 15 foto + 10 menit sesi</li>
-                    <li>🎥 Video pendek (30-45 detik)</li>
-                    <li>✨ Editing foto (15 foto)</li>
+                    <li>📸 15 foto + 10 menit</li>
+                    <li>🎥 Video 30-45 detik</li>
+                    <li>✨ Editing 15 foto</li>
                     <li>🎬 Editing video basic</li>
                     <li>🔄 2 kali revisi</li>
                 </ul>
                 <a href="#booking" class="pricing-button">Pilih Paket</a>
             </div>
-
-            <!-- Paket D -->
-            <div class="pricing-card premium fade-in">
-                <div class="pricing-badge premium-badge">Premium</div>
+            
+            <div class="pricing-card">
+                <div class="pricing-badge">Premium</div>
                 <h3>PAKET D</h3>
                 <div class="price">Rp 100.000</div>
                 <ul class="pricing-features">
-                    <li>📸 20 foto + 15 menit sesi</li>
-                    <li>🎥 Video cinematic (1 menit)</li>
-                    <li>✨ Editing foto (20 foto)</li>
+                    <li>📸 20 foto + 15 menit</li>
+                    <li>🎥 Video cinematic 1 menit</li>
+                    <li>✨ Editing 20 foto</li>
                     <li>🎬 Editing video premium</li>
                     <li>🎵 Musik + transition</li>
                     <li>🔄 3 kali revisi</li>
@@ -1161,96 +778,56 @@
                 <a href="#booking" class="pricing-button">Pilih Paket</a>
             </div>
         </div>
-
-        <!-- Add-ons -->
-        <div class="addons-section">
-            <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">➕ Add-ons (Opsional)</h3>
-            <div class="addons-grid">
-                <div class="addon-item">
-                    <span class="addon-name">Extra editing foto (5 foto)</span>
-                    <span class="addon-price">Rp 10.000</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">Extra durasi video (30 detik)</span>
-                    <span class="addon-price">Rp 15.000</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">File tanpa watermark</span>
-                    <span class="addon-price free">Gratis</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">Cepat jadi (express 1 hari)</span>
-                    <span class="addon-price">Rp 20.000</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">Tambah soft file (per foto)</span>
-                    <span class="addon-price">Rp 2.000</span>
-                </div>
-            </div>
-        </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="about-content">
-            <h2 class="section-title fade-in">Tentang DigiJam</h2>
-            <p class="fade-in">DigiJam adalah layanan jasa fotografi dan videografi yang menyediakan dokumentasi profesional dengan fokus pada self photo studio, fashion photoshoot, dan lookbook photoshoot.</p>
-            <p class="fade-in">Menggunakan peralatan kamera digital berkualitas tinggi, DigiJam menghadirkan hasil gambar yang jernih, kreatif, dan estetik. Layanan ini juga menyediakan editing foto dan video untuk memastikan hasil akhir terlihat maksimal dan siap digunakan untuk keperluan pribadi maupun promosi konten media sosial Anda.</p>
-            <p class="fade-in">Kami melayani area <strong>Kranji, Bekasi Barat, Jawa Barat</strong> dengan berbagai pilihan paket mulai dari Rp 25.000. Kami berkomitmen memberikan layanan terbaik untuk semua kebutuhan dokumentasi Anda.</p>
-        </div>
-    </section>
-
-    <!-- Testimonial Section -->
-    <section class="testimonials">
-        <h2 class="section-title fade-in">Testimoni Pelanggan</h2>
-        <p class="section-subtitle fade-in">Apa kata mereka yang sudah menggunakan jasa DigiJam</p>
-        
+    <section id="testimonials" class="section gray">
+        <h2 class="section-title">Testimoni Pelanggan</h2>
+        <p class="section-subtitle">Apa kata mereka yang sudah menggunakan jasa DigiJam</p>
         <div class="testimonial-grid">
-            <div class="testimonial-card fade-in">
+            <div class="testimonial-card">
                 <div class="testimonial-quote">"</div>
-                <p class="testimonial-text">Hasilnya bagus banget! Foto-fotonya aesthetic dan sesuai sama yang aku mau. Harga juga terjangkau untuk anak muda. Recommended!</p>
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p>Hasilnya bagus banget! Foto-fotonya aesthetic dan sesuai yang aku mau. Harga juga terjangkau. Recommended!</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">A</div>
-                    <div class="testimonial-info">
-                        <h4>Anjani Putri</h4>
-                        <p>Fashion Photoshoot</p>
-                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <div>
+                        <strong>Anjani Putri</strong><br>
+                        <small>Fashion Photoshoot</small>
                     </div>
                 </div>
             </div>
-
-            <div class="testimonial-card fade-in">
+            
+            <div class="testimonial-card">
                 <div class="testimonial-quote">"</div>
-                <p class="testimonial-text">Pelayanannya cepat dan profesional. Video cinematic nya keren abis, hasil editing nya juga rapi. Puas banget pake jasa DigiJam!</p>
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p>Pelayanan cepat dan profesional. Video cinematic nya keren abis! Puas banget pake jasa DigiJam!</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">R</div>
-                    <div class="testimonial-info">
-                        <h4>Rizki Aditya</h4>
-                        <p>Video Cinematic</p>
-                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <div>
+                        <strong>Rizki Aditya</strong><br>
+                        <small>Video Cinematic</small>
                     </div>
                 </div>
             </div>
-
-            <div class="testimonial-card fade-in">
+            
+            <div class="testimonial-card">
                 <div class="testimonial-quote">"</div>
-                <p class="testimonial-text">Worth it banget! Dengan harga segitu dapet hasil yang memuaskan. Cocok buat yang mau foto produk atau konten IG. Thank you DigiJam!</p>
+                <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                <p>Worth it banget! Cocok buat foto produk atau konten IG. Thank you DigiJam!</p>
                 <div class="testimonial-author">
                     <div class="testimonial-avatar">S</div>
-                    <div class="testimonial-info">
-                        <h4>Siti Nurhaliza</h4>
-                        <p>Product Photography</p>
-                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <div>
+                        <strong>Siti Nurhaliza</strong><br>
+                        <small>Product Photography</small>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Booking Section -->
-    <section id="booking" class="booking">
-        <h2 class="section-title fade-in">Booking Sekarang</h2>
-        <div class="booking-form-container fade-in">
+    <section id="booking" class="section">
+        <h2 class="section-title">Booking Sekarang</h2>
+        <div class="booking-form-container">
             <div class="form-note">
                 📝 Isi form di bawah ini, lalu klik "Kirim ke WhatsApp" untuk booking langsung!
             </div>
@@ -1258,22 +835,22 @@
             <form id="bookingForm" onsubmit="sendToWhatsApp(event)">
                 <div class="form-group">
                     <label for="nama">Nama Lengkap *</label>
-                    <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
+                    <input type="text" id="nama" required placeholder="Masukkan nama lengkap">
                 </div>
-
+                
                 <div class="form-group">
                     <label for="whatsapp">Nomor WhatsApp *</label>
-                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="08xx-xxxx-xxxx">
+                    <input type="tel" id="whatsapp" required placeholder="08xx-xxxx-xxxx">
                 </div>
-
+                
                 <div class="form-group">
                     <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="email@example.com">
+                    <input type="email" id="email" required placeholder="email@example.com">
                 </div>
-
+                
                 <div class="form-group">
                     <label for="layanan">Jenis Layanan *</label>
-                    <select id="layanan" name="layanan" required>
+                    <select id="layanan" required>
                         <option value="">-- Pilih Layanan --</option>
                         <option value="Self Photo Studio">Self Photo Studio</option>
                         <option value="Fashion Photoshoot">Fashion Photoshoot</option>
@@ -1283,10 +860,10 @@
                         <option value="Lainnya">Lainnya</option>
                     </select>
                 </div>
-
+                
                 <div class="form-group">
                     <label for="paket">Paket *</label>
-                    <select id="paket" name="paket" required>
+                    <select id="paket" required>
                         <option value="">-- Pilih Paket --</option>
                         <option value="Paket A - Hemat (Rp 25.000)">Paket A - Hemat (Rp 25.000)</option>
                         <option value="Paket B - Basic (Rp 50.000)">Paket B - Basic (Rp 50.000)</option>
@@ -1294,20 +871,20 @@
                         <option value="Paket D - Premium (Rp 100.000)">Paket D - Premium (Rp 100.000)</option>
                     </select>
                 </div>
-
+                
                 <div class="form-group">
                     <label for="tanggal">Tanggal Acara *</label>
-                    <input type="date" id="tanggal" name="tanggal" required>
+                    <input type="date" id="tanggal" required>
                 </div>
-
+                
                 <div class="form-group">
                     <label for="lokasi">Lokasi *</label>
-                    <input type="text" id="lokasi" name="lokasi" required placeholder="Lokasi acara">
+                    <input type="text" id="lokasi" required placeholder="Lokasi acara">
                 </div>
-
+                
                 <div class="form-group">
                     <label for="durasi">Durasi Liputan *</label>
-                    <select id="durasi" name="durasi" required>
+                    <select id="durasi" required>
                         <option value="">-- Pilih Durasi --</option>
                         <option value="2-4 jam">2-4 jam</option>
                         <option value="4-6 jam">4-6 jam</option>
@@ -1316,16 +893,16 @@
                         <option value="Lainnya">Lainnya</option>
                     </select>
                 </div>
-
+                
                 <div class="form-group">
-                    <label for="addons">Add-ons (Opsional)</label>
+                    <label>Add-ons (Opsional)</label>
                     <div class="checkbox-group">
                         <label class="checkbox-label">
-                            <input type="checkbox" name="addons" value="Extra editing foto (5 foto) - Rp 10.000">
+                            <input type="checkbox" name="addons" value="Extra editing foto - Rp 10.000">
                             Extra editing foto (5 foto) - Rp 10.000
                         </label>
                         <label class="checkbox-label">
-                            <input type="checkbox" name="addons" value="Extra durasi video (30 detik) - Rp 15.000">
+                            <input type="checkbox" name="addons" value="Extra durasi video - Rp 15.000">
                             Extra durasi video (30 detik) - Rp 15.000
                         </label>
                         <label class="checkbox-label">
@@ -1338,105 +915,104 @@
                         </label>
                     </div>
                 </div>
-
+                
                 <div class="form-group">
                     <label for="catatan">Catatan Tambahan</label>
-                    <textarea id="catatan" name="catatan" rows="4" placeholder="Tuliskan catatan atau permintaan khusus..."></textarea>
+                    <textarea id="catatan" rows="4" placeholder="Tuliskan catatan khusus..."></textarea>
                 </div>
-
+                
                 <button type="submit" class="submit-button">
                     <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
                 </button>
             </form>
-            
-            <p style="margin-top: 1.5rem; color: #666; font-size: 0.9rem;">
-                Atau hubungi kami langsung via WhatsApp
-            </p>
         </div>
     </section>
 
+    <section class="contact">
+        <h2 style="font-size: 2.5rem; margin-bottom: 2rem;">Hubungi Kami</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                <div>
+                    <strong>WhatsApp</strong><br>
+                    <a href="https://wa.me/6285723668508" style="color: white;">+62 857-2366-8508</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                    <strong>Email</strong><br>
+                    <a href="mailto:dgijamdgjum@gmail.com" style="color: white;">dgijamdgjum@gmail.com</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+                <div>
+                    <strong>Instagram</strong><br>
+                    <a href="https://instagram.com/digijam__" style="color: white;">@digijam__</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fab fa-tiktok"></i></div>
+                <div>
+                    <strong>TikTok</strong><br>
+                    <a href="https://tiktok.com/@digijam_" style="color: white;">@digijam_</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 DigiJam. All rights reserved. Melayani area Kranji, Bekasi Barat, Jawa Barat</p>
+    </footer>
+
+    <a href="https://wa.me/6285723668508?text=Halo%20DigiJam,%20saya%20mau%20tanya%20tentang%20layanan%20foto/video" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <script>
-        // Scroll Animations
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in, .slide-left, .slide-right');
-            
-            elements.forEach((element, index) => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementBottom = element.getBoundingClientRect().bottom;
-                const windowHeight = window.innerHeight;
-                
-                // Trigger animation when element is in viewport
-                if (elementTop < windowHeight - 50 && elementBottom > 0) {
-                    // Add slight delay for staggered effect
-                    setTimeout(() => {
-                        element.classList.add('visible');
-                    }, index * 50);
-                }
-            });
-        }
-
-        // Scroll to Top
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Show/Hide Scroll to Top Button
-        function handleScrollTop() {
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
             const scrollTop = document.getElementById('scrollTop');
-            if (window.pageYOffset > 300) {
+            
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
                 scrollTop.classList.add('show');
             } else {
+                header.classList.remove('scrolled');
                 scrollTop.classList.remove('show');
             }
-        }
-
-        // Initialize on scroll
-        window.addEventListener('scroll', () => {
-            handleScrollAnimations();
-            handleScrollTop();
         });
 
-        // Initialize on load
-        window.addEventListener('load', () => {
-            handleScrollAnimations();
-        });
-
-        // Hamburger Menu Functions
+        // Menu toggle
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             const menuToggle = document.querySelector('.menu-toggle');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
             navLinks.classList.toggle('active');
             menuToggle.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
         }
 
         function closeMenu() {
             const navLinks = document.getElementById('navLinks');
             const menuToggle = document.querySelector('.menu-toggle');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
             navLinks.classList.remove('active');
             menuToggle.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
         }
 
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Send to WhatsApp
         function sendToWhatsApp(event) {
             event.preventDefault();
             
-            // Get form values
             const nama = document.getElementById('nama').value;
             const whatsapp = document.getElementById('whatsapp').value;
             const email = document.getElementById('email').value;
@@ -1447,11 +1023,9 @@
             const durasi = document.getElementById('durasi').value;
             const catatan = document.getElementById('catatan').value;
             
-            // Get selected addons
             const addonsCheckboxes = document.querySelectorAll('input[name="addons"]:checked');
             const addons = Array.from(addonsCheckboxes).map(cb => cb.value).join(', ');
             
-            // Format message for WhatsApp
             let message = `*BOOKING DIGIJAM*\n\n`;
             message += `*Nama:* ${nama}\n`;
             message += `*WhatsApp:* ${whatsapp}\n`;
@@ -1462,81 +1036,25 @@
             message += `*Lokasi:* ${lokasi}\n`;
             message += `*Durasi:* ${durasi}\n`;
             
-            if (addons) {
-                message += `*Add-ons:* ${addons}\n`;
-            }
+            if (addons) message += `*Add-ons:* ${addons}\n`;
+            if (catatan) message += `*Catatan:* ${catatan}\n`;
             
-            if (catatan) {
-                message += `*Catatan:* ${catatan}\n`;
-            }
-            
-            // Encode message for URL
             const encodedMessage = encodeURIComponent(message);
-            
-            // DigiJam WhatsApp number
             const phoneNumber = '6285723668508';
             
-            // Open WhatsApp
             window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
         }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">Hubungi Kami</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fab fa-whatsapp"></i>
-                </span>
-                <div>
-                    <strong>WhatsApp</strong><br>
-                    <a href="https://wa.me/6285723668508" style="color: white;">+62 857-2366-8508</a>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </span>
-                <div>
-                    <strong>Email</strong><br>
-                    <a href="mailto:dgijamdgjum@gmail.com" style="color: white;">dgijamdgjum@gmail.com</a>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fab fa-instagram"></i>
-                </span>
-                <div>
-                    <strong>Instagram</strong><br>
-                    <a href="https://instagram.com/digijam__" style="color: white;">@digijam__</a>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fab fa-tiktok"></i>
-                </span>
-                <div>
-                    <strong>TikTok</strong><br>
-                    <a href="https://tiktok.com/@digijam_" style="color: white;">@digijam_</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 DigiJam. All rights reserved. Melayani area Kranji, Bekasi Barat, Jawa Barat</p>
-    </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/6285723668508?text=Halo%20DigiJam,%20saya%20mau%20tanya%20tentang%20layanan%20foto/video" class="whatsapp-float" target="_blank" title="Chat WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Scroll to Top Button -->
-    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </div>
 </body>
 </html>
