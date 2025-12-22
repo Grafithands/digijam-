@@ -439,6 +439,48 @@
             font-weight: bold;
         }
         
+        /* Review Form */
+        .review-form-container {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 2px solid #f0f0f0;
+        }
+        
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 2.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .star {
+            cursor: pointer;
+            color: #ddd;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+            transform: scale(1.2);
+        }
+        
+        .star.active {
+            animation: starPop 0.3s ease;
+        }
+        
+        @keyframes starPop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1.2); }
+        }
+        
         /* Booking Form */
         .booking-form-container {
             max-width: 700px;
@@ -783,7 +825,56 @@
     <section id="testimonials" class="section gray">
         <h2 class="section-title">Testimoni Pelanggan</h2>
         <p class="section-subtitle">Apa kata mereka yang sudah menggunakan jasa DigiJam</p>
-        <div class="testimonial-grid">
+        
+        <!-- Review Form -->
+        <div class="review-form-container">
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--dark);">
+                ✍️ Berikan Review Anda
+            </h3>
+            <form id="reviewForm" onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <label for="reviewName">Nama *</label>
+                    <input type="text" id="reviewName" required placeholder="Nama Anda">
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewService">Layanan yang Digunakan *</label>
+                    <select id="reviewService" required>
+                        <option value="">-- Pilih Layanan --</option>
+                        <option value="Self Photo Studio">Self Photo Studio</option>
+                        <option value="Fashion Photoshoot">Fashion Photoshoot</option>
+                        <option value="Lookbook Photoshoot">Lookbook Photoshoot</option>
+                        <option value="Product Photography">Product Photography</option>
+                        <option value="Video Cinematic">Video Cinematic</option>
+                        <option value="Content Creation">Content Creation</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Rating *</label>
+                    <div class="star-rating" id="starRating">
+                        <span class="star" data-rating="1">☆</span>
+                        <span class="star" data-rating="2">☆</span>
+                        <span class="star" data-rating="3">☆</span>
+                        <span class="star" data-rating="4">☆</span>
+                        <span class="star" data-rating="5">☆</span>
+                    </div>
+                    <input type="hidden" id="ratingValue" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reviewText">Review Anda *</label>
+                    <textarea id="reviewText" rows="4" required placeholder="Ceritakan pengalaman Anda dengan DigiJam..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+                    <i class="fas fa-paper-plane"></i> Kirim Review
+                </button>
+            </form>
+        </div>
+        
+        <!-- Existing Testimonials -->
+        <div class="testimonial-grid" style="margin-top: 4rem;">
             <div class="testimonial-card">
                 <div class="testimonial-quote">"</div>
                 <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
@@ -1043,6 +1134,88 @@
             const phoneNumber = '6285723668508';
             
             window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        // Star Rating System
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('ratingValue');
+        
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const rating = this.getAttribute('data-rating');
+                ratingInput.value = rating;
+                
+                // Update star display
+                stars.forEach(s => {
+                    const starRating = s.getAttribute('data-rating');
+                    if (starRating <= rating) {
+                        s.classList.add('active');
+                        s.textContent = '★';
+                    } else {
+                        s.classList.remove('active');
+                        s.textContent = '☆';
+                    }
+                });
+            });
+            
+            // Hover effect
+            star.addEventListener('mouseenter', function() {
+                const rating = this.getAttribute('data-rating');
+                stars.forEach(s => {
+                    const starRating = s.getAttribute('data-rating');
+                    if (starRating <= rating) {
+                        s.textContent = '★';
+                    }
+                });
+            });
+        });
+        
+        // Reset stars on mouse leave
+        document.getElementById('starRating').addEventListener('mouseleave', function() {
+            const currentRating = ratingInput.value;
+            stars.forEach(s => {
+                const starRating = s.getAttribute('data-rating');
+                if (starRating <= currentRating) {
+                    s.textContent = '★';
+                } else {
+                    s.textContent = '☆';
+                }
+            });
+        });
+        
+        // Submit Review
+        function submitReview(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('reviewName').value;
+            const service = document.getElementById('reviewService').value;
+            const rating = document.getElementById('ratingValue').value;
+            const reviewText = document.getElementById('reviewText').value;
+            
+            if (!rating) {
+                alert('Silakan pilih rating bintang!');
+                return;
+            }
+            
+            const stars = '⭐'.repeat(rating);
+            
+            let message = `*REVIEW DIGIJAM*\n\n`;
+            message += `*Nama:* ${name}\n`;
+            message += `*Layanan:* ${service}\n`;
+            message += `*Rating:* ${stars}\n`;
+            message += `*Review:* ${reviewText}\n`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const phoneNumber = '6285723668508';
+            
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+            
+            // Reset form
+            document.getElementById('reviewForm').reset();
+            stars.forEach(s => {
+                s.classList.remove('active');
+                s.textContent = '☆';
+            });
         }
 
         // Smooth scroll for anchor links
