@@ -390,12 +390,69 @@
     </div>
 
     <section id="contact" style="background: #333; color: white; padding: 60px 2rem; text-align: center;">
-        <h2 style="margin-bottom: 2rem;">Hubungi Kami</h2>
-        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
-            <div><i class="fab fa-whatsapp"></i> 0857-2366-8508</div>
-            <div><i class="fas fa-envelope"></i> dgijamdgjum@gmail.com</div>
-            <div><i class="fab fa-instagram"></i> @digijam__</div>
+        <h2 style="margin-bottom: 2.5rem; font-weight: 700;">Hubungi Kami</h2>
+        
+        <div class="social-container">
+            
+            <a href="https://wa.me/6285723668508" target="_blank" class="social-btn wa" title="Chat WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <a href="mailto:dgijamdgjum@gmail.com" class="social-btn email" title="Kirim Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+
+            <a href="https://instagram.com/digijam__" target="_blank" class="social-btn ig" title="Cek Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+
         </div>
+
+        <style>
+            .social-container {
+                display: flex;
+                justify-content: center;
+                gap: 2rem; /* Jarak antar logo */
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            .social-btn {
+                background: rgba(255,255,255,0.1); /* Latar belakang transparan */
+                width: 70px;
+                height: 70px;
+                border-radius: 50%; /* Bentuk bulat */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: white;
+                font-size: 2rem; /* Ukuran logo */
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+
+            /* Efek Hover (Saat disentuh/mouse) */
+            .social-btn:hover {
+                transform: translateY(-10px) scale(1.1); /* Naik ke atas & membesar */
+                background: white; /* Background jadi putih */
+            }
+
+            /* Warna Khusus saat Hover */
+            .social-btn.wa:hover { color: #25D366; box-shadow: 0 0 20px rgba(37, 211, 102, 0.6); }
+            .social-btn.email:hover { color: #EA4335; box-shadow: 0 0 20px rgba(234, 67, 53, 0.6); }
+            .social-btn.ig:hover { color: #E1306C; box-shadow: 0 0 20px rgba(225, 48, 108, 0.6); }
+
+            /* Tampilan Mobile */
+            @media (max-width: 480px) {
+                .social-btn {
+                    width: 55px;
+                    height: 55px;
+                    font-size: 1.5rem;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
     </section>
 
     <footer>
@@ -509,3 +566,4 @@
     </script>
 </body>
 </html>
+
