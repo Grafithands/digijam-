@@ -1,43 +1,25 @@
-.whatsapp-float {
-                bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 28px;
-            }
-
-            .scroll-top {
-                bottom: 85px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 20px;
-            }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>DigiJam - Jasa Fotografer & Videografer Profesional</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiJam - Professional Photography & Videography</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #25D366;
+            --dark: #333;
+            --light: #f8f9fa;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { color: var(--dark); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* Header */
+        /* Navigation */
         header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: white;
             padding: 1rem 0;
             position: fixed;
             width: 100%;
@@ -53,1913 +35,301 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 2rem;
-            position: relative;
         }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            z-index: 1001;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        /* Hamburger Menu */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            border-radius: 3px;
-            transition: all 0.3s;
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(7px, 7px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Mobile Menu Overlay */
-        .menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .menu-overlay.active {
-            display: block;
-            opacity: 1;
-        }
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 180px 2rem 120px;
+            padding: 160px 2rem 100px;
             text-align: center;
-            margin-top: 60px;
-            position: relative;
-            overflow: hidden;
+            clip-path: ellipse(150% 100% at 50% 0%);
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
-            background-size: cover;
-            opacity: 0.3;
-        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 1.2s;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-            animation: fadeInUp 0.8s;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 1.2rem 3rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            animation: fadeInUp 1.4s;
-            touch-action: manipulation;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 80px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            margin: 1rem auto 2rem;
-            border-radius: 2px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .service-card p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .service-features {
-            list-style: none;
-            text-align: left;
-            color: #555;
-        }
-
-        .service-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .service-features li:last-child {
-            border-bottom: none;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            padding: 80px 2rem;
-            background: #f8f9fa;
-        }
-
+        /* Grid Layouts */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 2rem; }
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title h2 { font-size: 2.5rem; color: var(--dark); }
+        
         .pricing-grid {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-bottom: 3rem;
         }
 
-        .pricing-card {
+        /* Cards */
+        .card {
             background: white;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s;
             text-align: center;
-            position: relative;
-            border: 2px solid #f0f0f0;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            border: 1px solid #eee;
         }
 
-        .pricing-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(102, 126, 234, 0.05), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            pointer-events: none;
-            z-index: 0;
-        }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2); }
+        .price { font-size: 2rem; font-weight: bold; color: var(--primary); margin: 1rem 0; }
 
-        .pricing-card:hover::before {
-            left: 100%;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
-            border-color: #667eea;
-        }
-
-        .pricing-card.popular {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-        }
-
-        .pricing-card.premium {
-            border-color: #764ba2;
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: #667eea;
-            color: white;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            z-index: 10;
-        }
-
-        .popular-badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .premium-badge {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-            position: relative;
-            z-index: 1;
-        }
-
-        .price {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 1.5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 2rem;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pricing-features li {
-            padding: 0.7rem 0;
-            color: #555;
-            border-bottom: 1px solid #eee;
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .pricing-button {
+        /* Buttons */
+        .btn {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 0.8rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-            touch-action: manipulation;
+            transition: 0.3s;
             cursor: pointer;
-            margin-top: auto;
-            position: relative;
-            z-index: 10;
             border: none;
-            outline: none;
         }
 
-        .pricing-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .pricing-button:active {
-            transform: translateY(-1px);
-        }
-
-        /* Add-ons Section - Removed from main page */
-
-        /* About Section */
-        .about {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 80px 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about::before {
-            content: '📸';
-            position: absolute;
-            font-size: 15rem;
-            opacity: 0.03;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-content p {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        /* Booking Section */
-        .booking {
-            padding: 80px 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .booking-form-container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 0 auto;
-            border: 2px solid #f0f0f0;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s;
-            background: #fafafa;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            background: white;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: normal;
-            cursor: pointer;
-        }
-
-        .checkbox-label input[type="checkbox"] {
-            width: auto;
-            cursor: pointer;
-        }
-
-        .submit-button {
-            width: 100%;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            padding: 1.2rem 2rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
-
-        .submit-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-        }
-
-        .submit-button:active {
-            transform: translateY(-1px);
-        }
-
-        .form-note {
-            background: linear-gradient(135deg, #e7f3ff 0%, #d4e9ff 100%);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            color: #0066cc;
-            border-left: 4px solid #0066cc;
-            font-size: 0.95rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 80px 2rem;
-            text-align: center;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .contact-icon i {
-            color: white;
-        }
-
-        /* WhatsApp Floating Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s;
-            animation: pulse 2s infinite;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
-            }
-            50% {
-                box-shadow: 0 4px 30px rgba(37, 211, 102, 0.8);
-            }
-        }
-
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 999;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .scroll-top.show {
-            display: flex;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
-        }
-
-        /* Testimonial Section */
-        .testimonials {
-            padding: 80px 2rem;
-            background: white;
-        }
-
-        .testimonial-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .testimonial-quote {
-            font-size: 3rem;
-            color: #667eea;
-            opacity: 0.3;
-            line-height: 0;
-            margin-bottom: 1rem;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: #555;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .testimonial-info h4 {
-            margin: 0;
-            color: #333;
-            font-size: 1rem;
-        }
-
-        .testimonial-info p {
-            margin: 0;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .testimonial-stars {
-            color: #ffc107;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .fade-in:nth-child(1) { transition-delay: 0.1s; }
-        .fade-in:nth-child(2) { transition-delay: 0.2s; }
-        .fade-in:nth-child(3) { transition-delay: 0.3s; }
-        .fade-in:nth-child(4) { transition-delay: 0.4s; }
-
-        .slide-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .slide-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .slide-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--secondary); transform: scale(1.05); }
 
         /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            padding: 1rem;
-            overflow-y: auto;
+            backdrop-filter: blur(5px);
         }
 
-        .modal.active {
-            display: flex;
-        }
+        .modal.active { display: flex; }
 
         .modal-content {
             background: white;
             padding: 2.5rem;
-            border-radius: 20px;
-            max-width: 600px;
-            width: 100%;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: modalSlideIn 0.3s ease;
+            animation: slideUp 0.4s ease;
         }
 
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #f0f0f0;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5rem;
+        /* Add-ons List in Modal */
+        .addon-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            color: #666;
-        }
-
-        .modal-close:hover {
-            background: #e0e0e0;
-            transform: rotate(90deg);
-        }
-
-        .modal-header {
-            margin-bottom: 2rem;
-            padding-right: 2rem;
-        }
-
-        .modal-header h2 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-header p {
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .selected-package {
-            background: linear-gradient(135deg, #e7f3ff 0%, #d4e9ff 100%);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid #667eea;
-        }
-
-        .selected-package h3 {
-            color: #667eea;
-            margin-bottom: 0.3rem;
-            font-size: 1.2rem;
-        }
-
-        .selected-package p {
-            color: #0066cc;
-            margin: 0;
-            font-weight: 600;
-        }
-
-        .addons-list {
-            margin: 1.5rem 0;
-        }
-
-        .addon-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
+            gap: 1rem;
             padding: 1rem;
             background: #f8f9fa;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-bottom: 0.8rem;
             cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
+            transition: 0.2s;
         }
 
-        .addon-checkbox:hover {
-            background: #e9ecef;
-            border-color: #667eea;
-        }
-
-        .addon-checkbox input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .addon-checkbox.selected {
-            background: #e7f3ff;
-            border-color: #667eea;
-        }
-
-        .addon-label {
-            flex: 1;
-        }
-
-        .addon-name {
-            font-weight: 600;
-            color: #333;
-            display: block;
-            margin-bottom: 0.2rem;
-        }
-
-        .addon-price {
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .addon-price.free {
-            color: #28a745;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .btn-secondary {
-            flex: 1;
-            padding: 1rem;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background: #f8f9ff;
-        }
-
-        .btn-primary {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .total-price {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .addon-item:hover { background: #eef1ff; }
+        .addon-item input { width: 20px; height: 20px; accent-color: var(--primary); }
+        
+        .total-box {
+            background: var(--dark);
             color: white;
             padding: 1rem;
             border-radius: 12px;
-            margin-top: 1rem;
+            margin: 1.5rem 0;
             text-align: center;
         }
 
-        .total-price h3 {
-            margin: 0;
-            font-size: 1.5rem;
-        }
+        /* Scroll Animations */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
+        /* Responsive Mobile */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: flex;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 75%;
-                max-width: 300px;
-                height: 100vh;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 2.5rem;
-                transition: right 0.3s ease;
-                z-index: 1000;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-                padding: 2rem;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links li {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links a {
-                font-size: 1.3rem;
-                display: block;
-                padding: 0.5rem;
-            }
-
-            nav {
-                padding: 0 1.5rem;
-            }
-
-            .logo {
-                font-size: 1.4rem;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .hero-badge {
-                font-size: 0.8rem;
-                padding: 0.4rem 1.2rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-
-            .services-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .hero {
-                padding: 140px 1.5rem 100px;
-            }
-
-            .services,
-            .pricing,
-            .about,
-            .booking,
-            .contact {
-                padding: 60px 1.5rem;
-            }
-
-            .booking-form-container {
-                padding: 1.5rem;
-            }
-
-            .contact-info {
-                gap: 2rem;
-            }
-
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
-            }
-
-            .cta-button,
-            .pricing-button,
-            .submit-button {
-                padding: 0.9rem 2rem;
-                font-size: 1rem;
-            }
-
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
-                font-size: 16px; /* Prevent zoom on iOS */
-            }
-
-            .pricing-card {
-                padding: 1.5rem;
-            }
-
-            .price {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            nav {
-                padding: 0 1rem;
-            }
-
-            .logo {
-                font-size: 1.3rem;
-            }
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .service-icon {
-                font-size: 2.5rem;
-            }
-
-            .contact-icon {
-                font-size: 2rem;
-            }
-
-            .form-note {
-                font-size: 0.9rem;
-                padding: 0.8rem;
-            }
-
-            .nav-links {
-                width: 80%;
-                max-width: 280px;
-            }
-
-            .nav-links a {
-                font-size: 1.2rem;
-            }
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+
     <header>
         <nav>
             <div class="logo">DigiJam</div>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" onclick="closeMenu()">Home</a></li>
-                <li><a href="#services" onclick="closeMenu()">Layanan</a></li>
-                <li><a href="#pricing" onclick="closeMenu()">Harga</a></li>
-                <li><a href="#booking" onclick="closeMenu()">Booking</a></li>
-                <li><a href="#contact" onclick="closeMenu()">Kontak</a></li>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#pricing">Paket</a></li>
+                <li><a href="#contact">Kontak</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Menu Overlay -->
-    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
-
-    <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">✨ Professional Photography & Videography</div>
-            <h1>DigiJam</h1>
-            <p>Your Moments, Perfectly Captured</p>
-            <a href="#booking" class="cta-button">Booking Sekarang</a>
-        </div>
+        <h1>Your Moments, Perfectly Captured</h1>
+        <p>Jasa Fotografi & Videografi Profesional di Bekasi</p>
+        <a href="#pricing" class="btn btn-primary" style="background: white; color: var(--primary);">Lihat Paket</a>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2 class="section-title fade-in">Layanan Kami</h2>
-        <p class="section-subtitle fade-in">Dokumentasi profesional dengan hasil berkualitas tinggi untuk kebutuhan Anda</p>
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-icon">📷🎥</div>
-                <h3>Fotografer & Videografer</h3>
-                <p>Self Photo Studio and Fashion or Lookbook Photoshoot</p>
-                <ul class="service-features">
-                    <li>✓ Self Photo Studio</li>
-                    <li>✓ Fashion Photoshoot</li>
-                    <li>✓ Lookbook Photoshoot</li>
-                    <li>✓ Product Photography</li>
-                    <li>✓ Content Creation</li>
-                    <li>✓ Video Cinematic</li>
-                </ul>
-            </div>
+    <div id="pricing" class="container">
+        <div class="section-title fade-in">
+            <h2>Pilih Paket Dokumentasi</h2>
+            <p>Klik pilih paket untuk melihat tambahan (add-ons)</p>
         </div>
-    </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <h2 class="section-title fade-in">Paket Harga</h2>
-        <p class="section-subtitle fade-in">Pilih paket yang sesuai dengan kebutuhan dan budget Anda</p>
-        
         <div class="pricing-grid">
-            <!-- Paket A -->
-            <div class="pricing-card fade-in">
-                <div class="pricing-badge">Hemat</div>
+            <div class="card fade-in">
                 <h3>PAKET A</h3>
                 <div class="price">Rp 25.000</div>
-                <ul class="pricing-features">
-                    <li>📸 5 foto + 2 menit sesi</li>
-                    <li>🎨 Resolusi HD</li>
-                </ul>
-                <a href="#" onclick="selectPackage('A', 'Paket A - Hemat', 25000)" class="pricing-button">Pilih Paket</a>
+                <p>5 foto + 2 menit sesi</p>
+                <button onclick="openAddons('Paket A', 25000)" class="btn btn-primary" style="margin-top: 1.5rem;">Pilih Paket</button>
             </div>
 
-            <!-- Paket B -->
-            <div class="pricing-card fade-in">
-                <div class="pricing-badge">Basic</div>
+            <div class="card fade-in">
                 <h3>PAKET B</h3>
                 <div class="price">Rp 50.000</div>
-                <ul class="pricing-features">
-                    <li>📸 10 foto + 8 menit sesi</li>
-                    <li>✨ Editing foto profesional</li>
-                    <li>🎨 Resolusi HD</li>
-                    <li>🔄 2 kali revisi</li>
-                    <li>☁️ Pengiriman via Google Drive</li>
-                </ul>
-                <a href="#" onclick="selectPackage('B', 'Paket B - Basic', 50000)" class="pricing-button">Pilih Paket</a>
+                <p>10 foto + 8 menit sesi</p>
+                <button onclick="openAddons('Paket B', 50000)" class="btn btn-primary" style="margin-top: 1.5rem;">Pilih Paket</button>
             </div>
 
-            <!-- Paket C -->
-            <div class="pricing-card popular fade-in">
-                <div class="pricing-badge popular-badge">Popular</div>
+            <div class="card fade-in" style="border-color: var(--primary);">
+                <div style="color: var(--primary); font-weight: bold;">Terpopuler</div>
                 <h3>PAKET C</h3>
                 <div class="price">Rp 75.000</div>
-                <ul class="pricing-features">
-                    <li>📸 15 foto + 10 menit sesi</li>
-                    <li>🎥 Video pendek (30-45 detik)</li>
-                    <li>✨ Editing foto (15 foto)</li>
-                    <li>🎬 Editing video basic</li>
-                    <li>🔄 2 kali revisi</li>
-                </ul>
-                <a href="#" onclick="selectPackage('C', 'Paket C - Standard', 75000)" class="pricing-button">Pilih Paket</a>
-            </div>
-
-            <!-- Paket D -->
-            <div class="pricing-card premium fade-in">
-                <div class="pricing-badge premium-badge">Premium</div>
-                <h3>PAKET D</h3>
-                <div class="price">Rp 100.000</div>
-                <ul class="pricing-features">
-                    <li>📸 20 foto + 15 menit sesi</li>
-                    <li>🎥 Video cinematic (1 menit)</li>
-                    <li>✨ Editing foto (20 foto)</li>
-                    <li>🎬 Editing video premium</li>
-                    <li>🎵 Musik + transition</li>
-                    <li>🔄 3 kali revisi</li>
-                </ul>
-                <a href="#" onclick="selectPackage('D', 'Paket D - Premium', 100000)" class="pricing-button">Pilih Paket</a>
+                <p>15 foto + Video Pendek</p>
+                <button onclick="openAddons('Paket C', 75000)" class="btn btn-primary" style="margin-top: 1.5rem;">Pilih Paket</button>
             </div>
         </div>
+    </div>
 
-        <!-- Add-ons -->
-        <div class="addons-section">
-            <h3 style="text-align: center; margin-bottom: 2rem; color: #667eea;">➕ Add-ons (Opsional)</h3>
-            <div class="addons-grid">
-                <div class="addon-item">
-                    <span class="addon-name">Extra editing foto (5 foto)</span>
-                    <span class="addon-price">Rp 10.000</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">Extra durasi video (30 detik)</span>
-                    <span class="addon-price">Rp 15.000</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">File tanpa watermark</span>
-                    <span class="addon-price free">Gratis</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">Cepat jadi (express 1 hari)</span>
-                    <span class="addon-price">Rp 20.000</span>
-                </div>
-                <div class="addon-item">
-                    <span class="addon-name">Tambah soft file (per foto)</span>
-                    <span class="addon-price">Rp 2.000</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="about-content">
-            <h2 class="section-title fade-in">Tentang DigiJam</h2>
-            <p class="fade-in">DigiJam adalah layanan jasa fotografi dan videografi yang menyediakan dokumentasi profesional dengan fokus pada self photo studio, fashion photoshoot, dan lookbook photoshoot.</p>
-            <p class="fade-in">Menggunakan peralatan kamera digital berkualitas tinggi, DigiJam menghadirkan hasil gambar yang jernih, kreatif, dan estetik. Layanan ini juga menyediakan editing foto dan video untuk memastikan hasil akhir terlihat maksimal dan siap digunakan untuk keperluan pribadi maupun promosi konten media sosial Anda.</p>
-            <p class="fade-in">Kami melayani area <strong>Kranji, Bekasi Barat, Jawa Barat</strong> dengan berbagai pilihan paket mulai dari Rp 25.000. Kami berkomitmen memberikan layanan terbaik untuk semua kebutuhan dokumentasi Anda.</p>
-        </div>
-    </section>
-
-    <!-- Testimonial Section -->
-    <section class="testimonials">
-        <h2 class="section-title fade-in">Testimoni Pelanggan</h2>
-        <p class="section-subtitle fade-in">Apa kata mereka yang sudah menggunakan jasa DigiJam</p>
-        
-        <div class="testimonial-grid">
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-quote">"</div>
-                <p class="testimonial-text">Hasilnya bagus banget! Foto-fotonya aesthetic dan sesuai sama yang aku mau. Harga juga terjangkau untuk anak muda. Recommended!</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">A</div>
-                    <div class="testimonial-info">
-                        <h4>Anjani Putri</h4>
-                        <p>Fashion Photoshoot</p>
-                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-quote">"</div>
-                <p class="testimonial-text">Pelayanannya cepat dan profesional. Video cinematic nya keren abis, hasil editing nya juga rapi. Puas banget pake jasa DigiJam!</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">R</div>
-                    <div class="testimonial-info">
-                        <h4>Rizki Aditya</h4>
-                        <p>Video Cinematic</p>
-                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-quote">"</div>
-                <p class="testimonial-text">Worth it banget! Dengan harga segitu dapet hasil yang memuaskan. Cocok buat yang mau foto produk atau konten IG. Thank you DigiJam!</p>
-                <div class="testimonial-author">
-                    <div class="testimonial-avatar">S</div>
-                    <div class="testimonial-info">
-                        <h4>Siti Nurhaliza</h4>
-                        <p>Product Photography</p>
-                        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Booking Section - Hidden by default -->
-    <section id="booking" class="booking" style="display: none;">
-        <h2 class="section-title fade-in">Booking Sekarang</h2>
-        <div class="booking-form-container fade-in">
-            <div class="form-note">
-                📝 Isi form di bawah ini, lalu klik "Kirim ke WhatsApp" untuk booking langsung!
-            </div>
+    <div class="modal" id="addonsModal">
+        <div class="modal-content">
+            <h3>Sesuaikan Pesanan</h3>
+            <p id="selectedPackageDisplay" style="margin-bottom: 1.5rem; color: var(--primary); font-weight: bold;"></p>
             
-            <form id="bookingForm" onsubmit="sendToWhatsApp(event)">
-                <div class="form-group">
-                    <label for="nama">Nama Lengkap *</label>
-                    <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
-                </div>
+            <div id="addonsList">
+                <label class="addon-item">
+                    <input type="checkbox" class="addon-cb" data-name="Extra Edit (5 Foto)" data-price="10000">
+                    <div>Extra Edit (5 Foto) <br><small>+Rp 10.000</small></div>
+                </label>
+                <label class="addon-item">
+                    <input type="checkbox" class="addon-cb" data-name="Extra Video (30 Detik)" data-price="15000">
+                    <div>Extra Video (30 Detik) <br><small>+Rp 15.000</small></div>
+                </label>
+                <label class="addon-item">
+                    <input type="checkbox" class="addon-cb" data-name="Express 1 Hari" data-price="20000">
+                    <div>Express Jadi 1 Hari <br><small>+Rp 20.000</small></div>
+                </label>
+            </div>
 
-                <div class="form-group">
-                    <label for="whatsapp">Nomor WhatsApp *</label>
-                    <input type="tel" id="whatsapp" name="whatsapp" required placeholder="08xx-xxxx-xxxx">
-                </div>
+            <div class="total-box">
+                Total Estimasi: <span id="totalDisplay">Rp 0</span>
+            </div>
 
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="email@example.com">
-                </div>
+            <div style="display: flex; gap: 1rem;">
+                <button onclick="closeModal('addonsModal')" class="btn" style="flex:1; background:#eee;">Batal</button>
+                <button onclick="goToForm()" class="btn btn-primary" style="flex:2;">Lanjut ke Booking</button>
+            </div>
+        </div>
+    </div>
 
-                <div class="form-group">
-                    <label for="layanan">Jenis Layanan *</label>
-                    <select id="layanan" name="layanan" required>
-                        <option value="">-- Pilih Layanan --</option>
-                        <option value="Self Photo Studio">Self Photo Studio</option>
-                        <option value="Fashion Photoshoot">Fashion Photoshoot</option>
-                        <option value="Lookbook Photoshoot">Lookbook Photoshoot</option>
-                        <option value="Product Photography">Product Photography</option>
-                        <option value="Content Creation">Content Creation</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
+    <div class="modal" id="formModal">
+        <div class="modal-content">
+            <h3>Data Booking</h3>
+            <form id="bookingForm" style="margin-top: 1.5rem;">
+                <div style="margin-bottom: 1rem;">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="name" required style="width:100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
                 </div>
-
-                <div class="form-group">
-                    <label for="paket">Paket *</label>
-                    <select id="paket" name="paket" required>
-                        <option value="">-- Pilih Paket --</option>
-                        <option value="Paket A - Hemat (Rp 25.000)">Paket A - Hemat (Rp 25.000)</option>
-                        <option value="Paket B - Basic (Rp 50.000)">Paket B - Basic (Rp 50.000)</option>
-                        <option value="Paket C - Standard (Rp 75.000)">Paket C - Standard (Rp 75.000)</option>
-                        <option value="Paket D - Premium (Rp 100.000)">Paket D - Premium (Rp 100.000)</option>
-                    </select>
+                <div style="margin-bottom: 1rem;">
+                    <label>Tanggal Acara</label>
+                    <input type="date" id="date" required style="width:100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
                 </div>
-
-                <div class="form-group">
-                    <label for="tanggal">Tanggal Acara *</label>
-                    <input type="date" id="tanggal" name="tanggal" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="lokasi">Lokasi *</label>
-                    <input type="text" id="lokasi" name="lokasi" required placeholder="Lokasi acara">
-                </div>
-
-                <div class="form-group">
-                    <label for="durasi">Durasi Liputan *</label>
-                    <select id="durasi" name="durasi" required>
-                        <option value="">-- Pilih Durasi --</option>
-                        <option value="2-4 jam">2-4 jam</option>
-                        <option value="4-6 jam">4-6 jam</option>
-                        <option value="6-8 jam">6-8 jam</option>
-                        <option value="Full day">Full day</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="addons">Add-ons (Opsional)</label>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="addons" value="Extra editing foto (5 foto) - Rp 10.000">
-                            Extra editing foto (5 foto) - Rp 10.000
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="addons" value="Extra durasi video (30 detik) - Rp 15.000">
-                            Extra durasi video (30 detik) - Rp 15.000
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="addons" value="File tanpa watermark - Gratis">
-                            File tanpa watermark - Gratis
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="addons" value="Express 1 hari - Rp 20.000">
-                            Express 1 hari - Rp 20.000
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="catatan">Catatan Tambahan</label>
-                    <textarea id="catatan" name="catatan" rows="4" placeholder="Tuliskan catatan atau permintaan khusus..."></textarea>
-                </div>
-
-                <button type="submit" class="submit-button">
+                <button type="button" onclick="checkout()" class="btn btn-primary" style="width:100%; background: var(--success);">
                     <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
                 </button>
             </form>
-            
-            <p style="margin-top: 1.5rem; color: #666; font-size: 0.9rem;">
-                Atau hubungi kami langsung via WhatsApp
-            </p>
         </div>
-    </section>
+    </div>
 
     <script>
-        // Package Selection State
-        let selectedPackage = {
-            id: '',
-            name: '',
-            price: 0
-        };
-        let selectedAddons = [];
+        let basePrice = 0;
+        let packageName = "";
+        let finalTotal = 0;
 
-        // Select Package and Open Add-ons Modal
-        function selectPackage(id, name, price) {
-            selectedPackage = { id, name, price };
-            
-            // Update selected package info in modal
-            document.getElementById('selectedPackageInfo').innerHTML = `
-                <h3>${name}</h3>
-                <p>Rp ${price.toLocaleString('id-ID')}</p>
-            `;
-            
-            // Reset checkboxes
-            document.querySelectorAll('.addon-checkbox input').forEach(cb => {
-                cb.checked = false;
-            });
-            
-            // Update total
-            updateTotal();
-            
-            // Open add-ons modal
+        // Open Addons Modal
+        function openAddons(name, price) {
+            basePrice = price;
+            packageName = name;
+            document.getElementById('selectedPackageDisplay').innerText = "Paket: " + name + " (Rp " + price.toLocaleString() + ")";
             document.getElementById('addonsModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            updateTotal();
         }
 
-        // Update Total Price
+        // Calculate Total
         function updateTotal() {
-            let total = selectedPackage.price;
-            
-            document.querySelectorAll('.addon-checkbox input:checked').forEach(cb => {
-                total += parseInt(cb.dataset.price);
-                cb.parentElement.classList.add('selected');
+            let addonsTotal = 0;
+            document.querySelectorAll('.addon-cb:checked').forEach(cb => {
+                addonsTotal += parseInt(cb.dataset.price);
             });
-            
-            document.querySelectorAll('.addon-checkbox input:not(:checked)').forEach(cb => {
-                cb.parentElement.classList.remove('selected');
-            });
-            
-            document.getElementById('totalPrice').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            finalTotal = basePrice + addonsTotal;
+            document.getElementById('totalDisplay').innerText = "Rp " + finalTotal.toLocaleString();
         }
 
-        // Close Add-ons Modal
-        function closeAddonsModal() {
-            document.getElementById('addonsModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Proceed to Booking
-        function proceedToBooking() {
-            // Collect selected add-ons
-            selectedAddons = [];
-            document.querySelectorAll('.addon-checkbox input:checked').forEach(cb => {
-                selectedAddons.push(cb.value);
-            });
-            
-            // Update booking modal package info
-            const addonsText = selectedAddons.length > 0 
-                ? `<p style="margin-top: 0.5rem; font-size: 0.9rem;">Add-ons: ${selectedAddons.join(', ')}</p>`
-                : '';
-            
-            document.getElementById('bookingPackageInfo').innerHTML = `
-                <h3>${selectedPackage.name}</h3>
-                <p>${document.getElementById('totalPrice').textContent}</p>
-                ${addonsText}
-            `;
-            
-            // Close add-ons modal
-            closeAddonsModal();
-            
-            // Open booking modal
-            setTimeout(() => {
-                document.getElementById('bookingModal').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }, 300);
-        }
-
-        // Close Booking Modal
-        function closeBookingModal() {
-            document.getElementById('bookingModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Send to WhatsApp from Modal
-        function sendToWhatsAppFromModal(event) {
-            event.preventDefault();
-            
-            const nama = document.getElementById('namaModal').value;
-            const whatsapp = document.getElementById('whatsappModal').value;
-            const email = document.getElementById('emailModal').value;
-            const layanan = document.getElementById('layananModal').value;
-            const tanggal = document.getElementById('tanggalModal').value;
-            const lokasi = document.getElementById('lokasiModal').value;
-            const durasi = document.getElementById('durasiModal').value;
-            const catatan = document.getElementById('catatanModal').value;
-            
-            let message = `*BOOKING DIGIJAM*\n\n`;
-            message += `*Nama:* ${nama}\n`;
-            message += `*WhatsApp:* ${whatsapp}\n`;
-            message += `*Email:* ${email}\n`;
-            message += `*Paket:* ${selectedPackage.name}\n`;
-            message += `*Layanan:* ${layanan}\n`;
-            message += `*Tanggal:* ${tanggal}\n`;
-            message += `*Lokasi:* ${lokasi}\n`;
-            message += `*Durasi:* ${durasi}\n`;
-            
-            if (selectedAddons.length > 0) {
-                message += `*Add-ons:* ${selectedAddons.join(', ')}\n`;
-            }
-            
-            message += `*Total:* ${document.getElementById('totalPrice').textContent}\n`;
-            
-            if (catatan) {
-                message += `*Catatan:* ${catatan}\n`;
-            }
-            
-            const encodedMessage = encodeURIComponent(message);
-            const phoneNumber = '6285723668508';
-            
-            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
-            
-            // Close modal and reset form
-            closeBookingModal();
-            document.getElementById('bookingFormModal').reset();
-        }
-
-        // Scroll Animations
-        function handleScrollAnimations() {
-            const elements = document.querySelectorAll('.fade-in, .slide-left, .slide-right');
-            
-            elements.forEach((element, index) => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementBottom = element.getBoundingClientRect().bottom;
-                const windowHeight = window.innerHeight;
-                
-                // Trigger animation when element is in viewport
-                if (elementTop < windowHeight - 50 && elementBottom > 0) {
-                    // Add slight delay for staggered effect
-                    setTimeout(() => {
-                        element.classList.add('visible');
-                    }, index * 50);
-                }
-            });
-        }
-
-        // Scroll to Top
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Show/Hide Scroll to Top Button
-        function handleScrollTop() {
-            const scrollTop = document.getElementById('scrollTop');
-            if (window.pageYOffset > 300) {
-                scrollTop.classList.add('show');
-            } else {
-                scrollTop.classList.remove('show');
-            }
-        }
-
-        // Initialize on scroll
-        window.addEventListener('scroll', () => {
-            handleScrollAnimations();
-            handleScrollTop();
+        // Listen for checkbox changes
+        document.querySelectorAll('.addon-cb').forEach(cb => {
+            cb.addEventListener('change', updateTotal);
         });
 
-        // Initialize on load
-        window.addEventListener('load', () => {
-            handleScrollAnimations();
-        });
-
-        // Hamburger Menu Functions
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'auto';
-            }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
         }
 
-        function closeMenu() {
-            const navLinks = document.getElementById('navLinks');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const menuOverlay = document.getElementById('menuOverlay');
-            
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
+        function goToForm() {
+            closeModal('addonsModal');
+            document.getElementById('formModal').classList.add('active');
         }
 
-        function sendToWhatsApp(event) {
-            event.preventDefault();
+        function checkout() {
+            const name = document.getElementById('name').value;
+            const date = document.getElementById('date').value;
             
-            // Get form values
-            const nama = document.getElementById('nama').value;
-            const whatsapp = document.getElementById('whatsapp').value;
-            const email = document.getElementById('email').value;
-            const layanan = document.getElementById('layanan').value;
-            const paket = document.getElementById('paket').value;
-            const tanggal = document.getElementById('tanggal').value;
-            const lokasi = document.getElementById('lokasi').value;
-            const durasi = document.getElementById('durasi').value;
-            const catatan = document.getElementById('catatan').value;
-            
-            // Get selected addons
-            const addonsCheckboxes = document.querySelectorAll('input[name="addons"]:checked');
-            const addons = Array.from(addonsCheckboxes).map(cb => cb.value).join(', ');
-            
-            // Format message for WhatsApp
-            let message = `*BOOKING DIGIJAM*\n\n`;
-            message += `*Nama:* ${nama}\n`;
-            message += `*WhatsApp:* ${whatsapp}\n`;
-            message += `*Email:* ${email}\n`;
-            message += `*Layanan:* ${layanan}\n`;
-            message += `*Paket:* ${paket}\n`;
-            message += `*Tanggal:* ${tanggal}\n`;
-            message += `*Lokasi:* ${lokasi}\n`;
-            message += `*Durasi:* ${durasi}\n`;
-            
-            if (addons) {
-                message += `*Add-ons:* ${addons}\n`;
-            }
-            
-            if (catatan) {
-                message += `*Catatan:* ${catatan}\n`;
-            }
-            
-            // Encode message for URL
-            const encodedMessage = encodeURIComponent(message);
-            
-            // DigiJam WhatsApp number
-            const phoneNumber = '6285723668508';
-            
-            // Open WhatsApp
-            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+            if(!name || !date) return alert("Mohon lengkapi data!");
+
+            let addonsList = [];
+            document.querySelectorAll('.addon-cb:checked').forEach(cb => {
+                addonsList.push(cb.dataset.name);
+            });
+
+            let message = `*HALO DIGIJAM, SAYA MAU BOOKING!*\n\n`;
+            message += `👤 Nama: ${name}\n`;
+            message += `📅 Tanggal: ${date}\n`;
+            message += `📦 Paket: ${packageName}\n`;
+            message += `➕ Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : '-'}\n`;
+            message += `💰 *Total: Rp ${finalTotal.toLocaleString()}*\n\n`;
+            message += `Mohon konfirmasi ketersediaan jadwal ya!`;
+
+            const waUrl = `https://wa.me/6285723668508?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
         }
+
+        // Scroll Animation Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">Hubungi Kami</h2>
-        <div class="contact-info">
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fab fa-whatsapp"></i>
-                </span>
-                <div>
-                    <strong>WhatsApp</strong><br>
-                    <a href="https://wa.me/6285723668508" style="color: white;">+62 857-2366-8508</a>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </span>
-                <div>
-                    <strong>Email</strong><br>
-                    <a href="mailto:dgijamdgjum@gmail.com" style="color: white;">dgijamdgjum@gmail.com</a>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fab fa-instagram"></i>
-                </span>
-                <div>
-                    <strong>Instagram</strong><br>
-                    <a href="https://instagram.com/digijam__" style="color: white;">@digijam__</a>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">
-                    <i class="fab fa-tiktok"></i>
-                </span>
-                <div>
-                    <strong>TikTok</strong><br>
-                    <a href="https://tiktok.com/@digijam_" style="color: white;">@digijam_</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 DigiJam. All rights reserved. Melayani area Kranji, Bekasi Barat, Jawa Barat</p>
-    </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/6285723668508?text=Halo%20DigiJam,%20saya%20mau%20tanya%20tentang%20layanan%20foto/video" class="whatsapp-float" target="_blank" title="Chat WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Scroll to Top Button -->
-    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
-    <!-- Add-ons Modal -->
-    <div class="modal" id="addonsModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeAddonsModal()">&times;</button>
-            <div class="modal-header">
-                <h2>Pilih Add-ons</h2>
-                <p>Tambahkan layanan ekstra untuk hasil yang lebih maksimal</p>
-            </div>
-
-            <div class="selected-package" id="selectedPackageInfo">
-                <!-- Will be filled dynamically -->
-            </div>
-
-            <div class="addons-list">
-                <label class="addon-checkbox">
-                    <input type="checkbox" value="Extra editing foto (5 foto) - Rp 10.000" data-price="10000" onchange="updateTotal()">
-                    <div class="addon-label">
-                        <span class="addon-name">Extra editing foto (5 foto)</span>
-                        <span class="addon-price">Rp 10.000</span>
-                    </div>
-                </label>
-
-                <label class="addon-checkbox">
-                    <input type="checkbox" value="Extra durasi video (30 detik) - Rp 15.000" data-price="15000" onchange="updateTotal()">
-                    <div class="addon-label">
-                        <span class="addon-name">Extra durasi video (30 detik)</span>
-                        <span class="addon-price">Rp 15.000</span>
-                    </div>
-                </label>
-
-                <label class="addon-checkbox">
-                    <input type="checkbox" value="File tanpa watermark - Gratis" data-price="0" onchange="updateTotal()">
-                    <div class="addon-label">
-                        <span class="addon-name">File tanpa watermark</span>
-                        <span class="addon-price free">Gratis</span>
-                    </div>
-                </label>
-
-                <label class="addon-checkbox">
-                    <input type="checkbox" value="Express 1 hari - Rp 20.000" data-price="20000" onchange="updateTotal()">
-                    <div class="addon-label">
-                        <span class="addon-name">Cepat jadi (express 1 hari)</span>
-                        <span class="addon-price">Rp 20.000</span>
-                    </div>
-                </label>
-            </div>
-
-            <div class="total-price">
-                <h3>Total: <span id="totalPrice">Rp 0</span></h3>
-            </div>
-
-            <div class="modal-actions">
-                <button class="btn-secondary" onclick="closeAddonsModal()">Batal</button>
-                <button class="btn-primary" onclick="proceedToBooking()">Lanjut ke Booking</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Booking Modal -->
-    <div class="modal" id="bookingModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeBookingModal()">&times;</button>
-            <div class="modal-header">
-                <h2>Form Booking</h2>
-                <p>Lengkapi data booking Anda</p>
-            </div>
-
-            <div class="selected-package" id="bookingPackageInfo">
-                <!-- Will be filled dynamically -->
-            </div>
-
-            <form id="bookingFormModal" onsubmit="sendToWhatsAppFromModal(event)">
-                <div class="form-group">
-                    <label for="namaModal">Nama Lengkap *</label>
-                    <input type="text" id="namaModal" name="nama" required placeholder="Masukkan nama lengkap">
-                </div>
-
-                <div class="form-group">
-                    <label for="whatsappModal">Nomor WhatsApp *</label>
-                    <input type="tel" id="whatsappModal" name="whatsapp" required placeholder="08xx-xxxx-xxxx">
-                </div>
-
-                <div class="form-group">
-                    <label for="emailModal">Email *</label>
-                    <input type="email" id="emailModal" name="email" required placeholder="email@example.com">
-                </div>
-
-                <div class="form-group">
-                    <label for="layananModal">Jenis Layanan *</label>
-                    <select id="layananModal" name="layanan" required>
-                        <option value="">-- Pilih Layanan --</option>
-                        <option value="Self Photo Studio">Self Photo Studio</option>
-                        <option value="Fashion Photoshoot">Fashion Photoshoot</option>
-                        <option value="Lookbook Photoshoot">Lookbook Photoshoot</option>
-                        <option value="Product Photography">Product Photography</option>
-                        <option value="Content Creation">Content Creation</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="tanggalModal">Tanggal Acara *</label>
-                    <input type="date" id="tanggalModal" name="tanggal" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="lokasiModal">Lokasi *</label>
-                    <input type="text" id="lokasiModal" name="lokasi" required placeholder="Lokasi acara">
-                </div>
-
-                <div class="form-group">
-                    <label for="durasiModal">Durasi Liputan *</label>
-                    <select id="durasiModal" name="durasi" required>
-                        <option value="">-- Pilih Durasi --</option>
-                        <option value="2-4 jam">2-4 jam</option>
-                        <option value="4-6 jam">4-6 jam</option>
-                        <option value="6-8 jam">6-8 jam</option>
-                        <option value="Full day">Full day</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="catatanModal">Catatan Tambahan</label>
-                    <textarea id="catatanModal" name="catatan" rows="4" placeholder="Tuliskan catatan atau permintaan khusus..."></textarea>
-                </div>
-
-                <div class="modal-actions">
-                    <button type="button" class="btn-secondary" onclick="closeBookingModal()">Batal</button>
-                    <button type="submit" class="btn-primary">
-                        <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
 </body>
 </html>
