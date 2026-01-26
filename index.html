@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigiJam - Professional Photography & Videography</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>DigiJam - Jasa Fotografer & Videografer Profesional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -12,89 +12,76 @@
             --success: #25D366;
             --dark: #333;
             --light: #f8f9fa;
+            --danger: #ff4757;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { color: var(--dark); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
 
         /* Navigation */
-        header {
-            background: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+        header { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { font-size: 1.8rem; font-weight: 800; color: white; }
         .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
+        .nav-links a { text-decoration: none; color: white; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { opacity: 0.8; }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
-            padding: 160px 2rem 100px;
+            padding: 180px 2rem 100px;
             text-align: center;
-            clip-path: ellipse(150% 100% at 50% 0%);
+            border-bottom-left-radius: 50% 5%;
+            border-bottom-right-radius: 50% 5%;
         }
+        .hero h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 800; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+        .cta-button { background: white; color: var(--primary); padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .cta-button:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
 
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
-
-        /* Grid Layouts */
+        /* Container & Grid */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 2rem; }
         .section-title { text-align: center; margin-bottom: 3rem; }
-        .section-title h2 { font-size: 2.5rem; color: var(--dark); }
         
         .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
-        /* Cards */
+        /* Card Styles */
         .card {
             background: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             text-align: center;
-            border: 1px solid #eee;
+            border: 2px solid transparent;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
         }
-
-        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2); }
+        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+        
+        .badge { position: absolute; top: 20px; right: 20px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .badge.popular { background: linear-gradient(45deg, #ff9966, #ff5e62); }
+        
         .price { font-size: 2rem; font-weight: bold; color: var(--primary); margin: 1rem 0; }
+        .features-list { list-style: none; margin-bottom: 2rem; color: #666; text-align: left; }
+        .features-list li { margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
 
         /* Buttons */
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
-        }
-
+        .btn { padding: 0.8rem 2rem; border-radius: 12px; cursor: pointer; border: none; font-weight: bold; transition: 0.3s; width: 100%; display: block; text-align: center; font-size: 1rem; }
         .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--secondary); transform: scale(1.05); }
+        .btn-primary:hover { background: var(--secondary); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid #ddd; color: #666; }
+        .btn-outline:hover { border-color: var(--dark); color: var(--dark); }
 
-        /* Modal Styles */
+        /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
@@ -104,60 +91,71 @@
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(5px);
+            padding: 1rem;
         }
-
-        .modal.active { display: flex; }
-
+        .modal.active { display: flex; animation: fadeIn 0.3s; }
         .modal-content {
             background: white;
-            padding: 2.5rem;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 500px;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 550px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            animation: slideUp 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        .close-btn {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: #f1f1f1; border: none; width: 35px; height: 35px;
+            border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+            color: #666; transition: 0.2s;
         }
+        .close-btn:hover { background: var(--danger); color: white; }
 
-        /* Add-ons List in Modal */
+        /* Add-ons List */
         .addon-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 12px;
-            margin-bottom: 0.8rem;
-            cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem; background: #f8f9fa; border-radius: 12px;
+            margin-bottom: 0.8rem; cursor: pointer; border: 2px solid transparent;
             transition: 0.2s;
         }
-
-        .addon-item:hover { background: #eef1ff; }
-        .addon-item input { width: 20px; height: 20px; accent-color: var(--primary); }
+        .addon-item:hover { border-color: var(--primary); background: #eef1ff; }
+        .addon-item input { width: 20px; height: 20px; accent-color: var(--primary); margin-right: 1rem; }
         
         .total-box {
-            background: var(--dark);
-            color: white;
-            padding: 1rem;
-            border-radius: 12px;
-            margin: 1.5rem 0;
-            text-align: center;
+            background: var(--dark); color: white; padding: 1.2rem;
+            border-radius: 12px; margin: 1.5rem 0; display: flex;
+            justify-content: space-between; font-weight: bold; font-size: 1.1rem;
         }
 
-        /* Scroll Animations */
-        .fade-in { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        /* Form Inputs */
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 0.8rem; border-radius: 10px; border: 1px solid #ddd; outline: none; background: #fafafa; }
+        .form-control:focus { border-color: var(--primary); background: white; }
+        .btn-group { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        
+        .order-summary { background: #e7f3ff; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); font-size: 0.9rem; }
 
-        /* Responsive Mobile */
+        /* WhatsApp Float & Scroll Top */
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; text-decoration: none; animation: pulse 2s infinite; }
+        .scroll-top { position: fixed; bottom: 85px; right: 20px; width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 998; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .scroll-top.show { display: flex; }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* Footer */
+        footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 2rem; }
+
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2rem; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column-reverse; }
         }
     </style>
 </head>
@@ -168,168 +166,346 @@
             <div class="logo">DigiJam</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#pricing">Paket</a></li>
+                <li><a href="#pricing">Paket & Harga</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="home" class="hero">
+        <div class="hero-badge" style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">✨ Professional Photography & Videography</div>
         <h1>Your Moments, Perfectly Captured</h1>
-        <p>Jasa Fotografi & Videografi Profesional di Bekasi</p>
-        <a href="#pricing" class="btn btn-primary" style="background: white; color: var(--primary);">Lihat Paket</a>
+        <p>Jasa Dokumentasi Terbaik di Kranji, Bekasi Barat</p>
+        <a href="#pricing" class="cta-button">Booking Sekarang</a>
     </section>
 
     <div id="pricing" class="container">
-        <div class="section-title fade-in">
-            <h2>Pilih Paket Dokumentasi</h2>
-            <p>Klik pilih paket untuk melihat tambahan (add-ons)</p>
+        <div class="section-title">
+            <h2>Pilih Paket</h2>
+            <p>Pilih paket, lalu tambahkan Add-ons sesuai kebutuhan</p>
         </div>
 
         <div class="pricing-grid">
-            <div class="card fade-in">
-                <h3>PAKET A</h3>
-                <div class="price">Rp 25.000</div>
-                <p>5 foto + 2 menit sesi</p>
-                <button onclick="openAddons('Paket A', 25000)" class="btn btn-primary" style="margin-top: 1.5rem;">Pilih Paket</button>
+            <div class="card">
+                <div class="badge">Hemat</div>
+                <div>
+                    <h3>PAKET A</h3>
+                    <div class="price">Rp 25.000</div>
+                    <ul class="features-list">
+                        <li>📸 5 foto + 2 menit sesi</li>
+                        <li>🎨 Resolusi HD</li>
+                        <li>⚡ Softcopy only</li>
+                    </ul>
+                </div>
+                <button onclick="openAddons('Paket A', 25000)" class="btn btn-primary">Pilih Paket</button>
             </div>
 
-            <div class="card fade-in">
-                <h3>PAKET B</h3>
-                <div class="price">Rp 50.000</div>
-                <p>10 foto + 8 menit sesi</p>
-                <button onclick="openAddons('Paket B', 50000)" class="btn btn-primary" style="margin-top: 1.5rem;">Pilih Paket</button>
+            <div class="card">
+                <div class="badge">Basic</div>
+                <div>
+                    <h3>PAKET B</h3>
+                    <div class="price">Rp 50.000</div>
+                    <ul class="features-list">
+                        <li>📸 10 foto + 8 menit sesi</li>
+                        <li>✨ Editing foto profesional</li>
+                        <li>🎨 Resolusi HD</li>
+                        <li>🔄 2 kali revisi</li>
+                        <li>☁️ Via Google Drive</li>
+                    </ul>
+                </div>
+                <button onclick="openAddons('Paket B', 50000)" class="btn btn-primary">Pilih Paket</button>
             </div>
 
-            <div class="card fade-in" style="border-color: var(--primary);">
-                <div style="color: var(--primary); font-weight: bold;">Terpopuler</div>
-                <h3>PAKET C</h3>
-                <div class="price">Rp 75.000</div>
-                <p>15 foto + Video Pendek</p>
-                <button onclick="openAddons('Paket C', 75000)" class="btn btn-primary" style="margin-top: 1.5rem;">Pilih Paket</button>
+            <div class="card" style="border-color: var(--primary); background: linear-gradient(to bottom, #fff, #f8f9ff);">
+                <div class="badge popular">Popular</div>
+                <div>
+                    <h3>PAKET C</h3>
+                    <div class="price">Rp 75.000</div>
+                    <ul class="features-list">
+                        <li>📸 15 foto + 10 menit sesi</li>
+                        <li>🎥 Video pendek (30-45 detik)</li>
+                        <li>✨ Editing foto (15 foto)</li>
+                        <li>🎬 Editing video basic</li>
+                        <li>🔄 2 kali revisi</li>
+                    </ul>
+                </div>
+                <button onclick="openAddons('Paket C', 75000)" class="btn btn-primary">Pilih Paket</button>
+            </div>
+
+            <div class="card">
+                <div class="badge" style="background: #764ba2;">Premium</div>
+                <div>
+                    <h3>PAKET D</h3>
+                    <div class="price">Rp 100.000</div>
+                    <ul class="features-list">
+                        <li>📸 20 foto + 15 menit sesi</li>
+                        <li>🎥 Video cinematic (1 menit)</li>
+                        <li>✨ Editing foto (20 foto)</li>
+                        <li>🎵 Musik + transition</li>
+                        <li>🔄 3 kali revisi</li>
+                    </ul>
+                </div>
+                <button onclick="openAddons('Paket D', 100000)" class="btn btn-primary">Pilih Paket</button>
             </div>
         </div>
     </div>
 
     <div class="modal" id="addonsModal">
         <div class="modal-content">
-            <h3>Sesuaikan Pesanan</h3>
-            <p id="selectedPackageDisplay" style="margin-bottom: 1.5rem; color: var(--primary); font-weight: bold;"></p>
+            <button class="close-btn" onclick="closeAllModals()">&times;</button>
             
+            <h3 style="color: var(--primary);">Pilih Add-ons (Opsional)</h3>
+            <p style="margin-bottom: 1.5rem; color: #666;">Lengkapi paket Anda dengan layanan tambahan:</p>
+            
+            <div class="selected-package" style="background: #eee; padding: 10px; border-radius: 8px; margin-bottom: 1rem; font-weight: bold;">
+                Paket: <span id="selectedPackageName" style="color: var(--primary);"></span>
+            </div>
+
             <div id="addonsList">
                 <label class="addon-item">
-                    <input type="checkbox" class="addon-cb" data-name="Extra Edit (5 Foto)" data-price="10000">
-                    <div>Extra Edit (5 Foto) <br><small>+Rp 10.000</small></div>
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="addon-cb" data-name="Extra editing foto (5 foto)" data-price="10000">
+                        <span>Extra editing foto (5 foto)</span>
+                    </div>
+                    <span style="font-weight: bold; color: var(--primary);">+10rb</span>
                 </label>
+
                 <label class="addon-item">
-                    <input type="checkbox" class="addon-cb" data-name="Extra Video (30 Detik)" data-price="15000">
-                    <div>Extra Video (30 Detik) <br><small>+Rp 15.000</small></div>
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="addon-cb" data-name="Extra durasi video (30 detik)" data-price="15000">
+                        <span>Extra durasi video (30 detik)</span>
+                    </div>
+                    <span style="font-weight: bold; color: var(--primary);">+15rb</span>
                 </label>
+
                 <label class="addon-item">
-                    <input type="checkbox" class="addon-cb" data-name="Express 1 Hari" data-price="20000">
-                    <div>Express Jadi 1 Hari <br><small>+Rp 20.000</small></div>
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="addon-cb" data-name="File tanpa watermark" data-price="0">
+                        <span>File tanpa watermark</span>
+                    </div>
+                    <span style="font-weight: bold; color: #28a745;">Gratis</span>
+                </label>
+
+                <label class="addon-item">
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="addon-cb" data-name="Express 1 hari" data-price="20000">
+                        <span>Cepat jadi (Express 1 hari)</span>
+                    </div>
+                    <span style="font-weight: bold; color: var(--primary);">+20rb</span>
+                </label>
+
+                <label class="addon-item">
+                    <div style="display: flex; align-items: center;">
+                        <input type="checkbox" class="addon-cb" data-name="Tambah soft file/foto" data-price="2000">
+                        <span>Tambah soft file (per foto)</span>
+                    </div>
+                    <span style="font-weight: bold; color: var(--primary);">+2rb</span>
                 </label>
             </div>
 
             <div class="total-box">
-                Total Estimasi: <span id="totalDisplay">Rp 0</span>
+                <span>Total Estimasi</span>
+                <span id="totalDisplay">Rp 0</span>
             </div>
 
-            <div style="display: flex; gap: 1rem;">
-                <button onclick="closeModal('addonsModal')" class="btn" style="flex:1; background:#eee;">Batal</button>
-                <button onclick="goToForm()" class="btn btn-primary" style="flex:2;">Lanjut ke Booking</button>
-            </div>
+            <button onclick="goToForm()" class="btn btn-primary">Lanjut ke Booking <i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
 
     <div class="modal" id="formModal">
         <div class="modal-content">
-            <h3>Data Booking</h3>
-            <form id="bookingForm" style="margin-top: 1.5rem;">
-                <div style="margin-bottom: 1rem;">
-                    <label>Nama Lengkap</label>
-                    <input type="text" id="name" required style="width:100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+            <button class="close-btn" onclick="closeAllModals()">&times;</button>
+            
+            <h3 style="color: var(--primary);">Formulir Booking</h3>
+            
+            <div class="order-summary">
+                <strong>Ringkasan Pesanan:</strong><br>
+                <span id="summaryText">Loading...</span>
+            </div>
+
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Nama Lengkap *</label>
+                    <input type="text" id="name" class="form-control" required placeholder="Nama Anda">
                 </div>
-                <div style="margin-bottom: 1rem;">
-                    <label>Tanggal Acara</label>
-                    <input type="date" id="date" required style="width:100%; padding: 0.8rem; border-radius: 8px; border: 1px solid #ddd;">
+                
+                <div class="form-group">
+                    <label>Nomor WhatsApp *</label>
+                    <input type="tel" id="whatsapp" class="form-control" required placeholder="08xx-xxxx-xxxx">
                 </div>
-                <button type="button" onclick="checkout()" class="btn btn-primary" style="width:100%; background: var(--success);">
-                    <i class="fab fa-whatsapp"></i> Kirim ke WhatsApp
-                </button>
+
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="email" class="form-control" required placeholder="email@contoh.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Jenis Layanan *</label>
+                    <select id="layanan" class="form-control" required>
+                        <option value="Self Photo Studio">Self Photo Studio</option>
+                        <option value="Fashion Photoshoot">Fashion Photoshoot</option>
+                        <option value="Lookbook Photoshoot">Lookbook Photoshoot</option>
+                        <option value="Product Photography">Product Photography</option>
+                        <option value="Content Creation">Content Creation</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Acara *</label>
+                    <input type="date" id="date" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Lokasi *</label>
+                    <input type="text" id="lokasi" class="form-control" required placeholder="Alamat / Lokasi">
+                </div>
+
+                <div class="form-group">
+                    <label>Durasi Liputan *</label>
+                    <select id="durasi" class="form-control" required>
+                        <option value="2-4 jam">2-4 jam</option>
+                        <option value="4-6 jam">4-6 jam</option>
+                        <option value="6-8 jam">6-8 jam</option>
+                        <option value="Full day">Full day</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Catatan Tambahan</label>
+                    <textarea id="catatan" class="form-control" rows="3" placeholder="Permintaan khusus..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" onclick="backToAddons()" class="btn btn-outline">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <button type="button" onclick="checkout()" class="btn btn-primary" style="background: var(--success);">
+                        <i class="fab fa-whatsapp"></i> Kirim Booking
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 
+    <section id="contact" style="background: #333; color: white; padding: 60px 2rem; text-align: center;">
+        <h2 style="margin-bottom: 2rem;">Hubungi Kami</h2>
+        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+            <div><i class="fab fa-whatsapp"></i> 0857-2366-8508</div>
+            <div><i class="fas fa-envelope"></i> dgijamdgjum@gmail.com</div>
+            <div><i class="fab fa-instagram"></i> @digijam__</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 DigiJam. Melayani area Kranji, Bekasi Barat.</p>
+    </footer>
+
+    <a href="https://wa.me/6285723668508" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <div class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)"><i class="fas fa-arrow-up"></i></div>
+
     <script>
-        let basePrice = 0;
-        let packageName = "";
-        let finalTotal = 0;
+        // --- LOGIC ---
+        let currentPackage = { name: '', price: 0 };
+        let currentTotal = 0;
+        let selectedAddons = [];
 
-        // Open Addons Modal
-        function openAddons(name, price) {
-            basePrice = price;
-            packageName = name;
-            document.getElementById('selectedPackageDisplay').innerText = "Paket: " + name + " (Rp " + price.toLocaleString() + ")";
-            document.getElementById('addonsModal').classList.add('active');
-            updateTotal();
-        }
-
-        // Calculate Total
-        function updateTotal() {
-            let addonsTotal = 0;
-            document.querySelectorAll('.addon-cb:checked').forEach(cb => {
-                addonsTotal += parseInt(cb.dataset.price);
-            });
-            finalTotal = basePrice + addonsTotal;
-            document.getElementById('totalDisplay').innerText = "Rp " + finalTotal.toLocaleString();
-        }
-
-        // Listen for checkbox changes
-        document.querySelectorAll('.addon-cb').forEach(cb => {
-            cb.addEventListener('change', updateTotal);
+        // Scroll Top visibility
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTop');
+            if(window.scrollY > 300) btn.classList.add('show');
+            else btn.classList.remove('show');
         });
 
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
+        function openAddons(pkgName, pkgPrice) {
+            currentPackage = { name: pkgName, price: pkgPrice };
+            document.getElementById('selectedPackageName').innerText = pkgName + " (Rp " + pkgPrice.toLocaleString('id-ID') + ")";
+            
+            // Reset checkbox
+            document.querySelectorAll('.addon-cb').forEach(cb => cb.checked = false);
+            updateTotal();
+            
+            document.getElementById('addonsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
+        function updateTotal() {
+            let addonsPrice = 0;
+            selectedAddons = [];
+            document.querySelectorAll('.addon-cb:checked').forEach(cb => {
+                addonsPrice += parseInt(cb.dataset.price);
+                selectedAddons.push(cb.dataset.name);
+            });
+            currentTotal = currentPackage.price + addonsPrice;
+            document.getElementById('totalDisplay').innerText = "Rp " + currentTotal.toLocaleString('id-ID');
+        }
+
+        document.querySelectorAll('.addon-cb').forEach(cb => cb.addEventListener('change', updateTotal));
+
         function goToForm() {
-            closeModal('addonsModal');
+            document.getElementById('addonsModal').classList.remove('active');
             document.getElementById('formModal').classList.add('active');
+            
+            const summary = `<strong>${currentPackage.name}</strong><br>` + 
+                            (selectedAddons.length ? `+ ${selectedAddons.join('<br>+ ')}` : 'Tanpa Add-ons');
+            
+            document.getElementById('summaryText').innerHTML = `
+                ${summary} <br>
+                <div style="margin-top:10px; border-top:1px dashed #999; paddingTop:5px">
+                    Total Estimasi: <strong>Rp ${currentTotal.toLocaleString('id-ID')}</strong>
+                </div>
+            `;
+        }
+
+        function backToAddons() {
+            document.getElementById('formModal').classList.remove('active');
+            document.getElementById('addonsModal').classList.add('active');
+        }
+
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(m => m.classList.remove('active'));
+            document.body.style.overflow = 'auto';
         }
 
         function checkout() {
+            // Ambil semua data input
             const name = document.getElementById('name').value;
+            const wa = document.getElementById('whatsapp').value;
+            const email = document.getElementById('email').value;
+            const service = document.getElementById('layanan').value;
             const date = document.getElementById('date').value;
+            const loc = document.getElementById('lokasi').value;
+            const dur = document.getElementById('durasi').value;
+            const note = document.getElementById('catatan').value;
+
+            if(!name || !wa || !email || !date || !loc) {
+                alert("Mohon lengkapi data wajib (*)!");
+                return;
+            }
+
+            // Format Pesan WhatsApp
+            let msg = `*BOOKING DIGIJAM* 📸\n\n`;
+            msg += `👤 Nama: ${name}\n`;
+            msg += `📱 WA: ${wa}\n`;
+            msg += `📧 Email: ${email}\n`;
+            msg += `🎬 Layanan: ${service}\n`;
+            msg += `📅 Tanggal: ${date}\n`;
+            msg += `📍 Lokasi: ${loc}\n`;
+            msg += `⏱ Durasi: ${dur}\n\n`;
             
-            if(!name || !date) return alert("Mohon lengkapi data!");
+            msg += `📦 *PAKET:* ${currentPackage.name}\n`;
+            if(selectedAddons.length > 0) {
+                msg += `➕ *ADD-ONS:*\n- ${selectedAddons.join('\n- ')}\n`;
+            }
+            
+            if(note) msg += `\n📝 Catatan: ${note}\n`;
+            
+            msg += `\n💰 *TOTAL ESTIMASI: Rp ${currentTotal.toLocaleString('id-ID')}*`;
 
-            let addonsList = [];
-            document.querySelectorAll('.addon-cb:checked').forEach(cb => {
-                addonsList.push(cb.dataset.name);
-            });
-
-            let message = `*HALO DIGIJAM, SAYA MAU BOOKING!*\n\n`;
-            message += `👤 Nama: ${name}\n`;
-            message += `📅 Tanggal: ${date}\n`;
-            message += `📦 Paket: ${packageName}\n`;
-            message += `➕ Add-ons: ${addonsList.length > 0 ? addonsList.join(', ') : '-'}\n`;
-            message += `💰 *Total: Rp ${finalTotal.toLocaleString()}*\n\n`;
-            message += `Mohon konfirmasi ketersediaan jadwal ya!`;
-
-            const waUrl = `https://wa.me/6285723668508?text=${encodeURIComponent(message)}`;
-            window.open(waUrl, '_blank');
+            window.open(`https://wa.me/6285723668508?text=${encodeURIComponent(msg)}`, '_blank');
+            closeAllModals();
         }
-
-        // Scroll Animation Logic
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
