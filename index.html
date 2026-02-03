@@ -5,44 +5,394 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>DigiJam - Jasa Fotografer & Videografer Profesional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --success: #25D366;
-            --dark: #333;
-            --light: #f8f9fa;
-            --danger: #ff4757;
+            --neon-pink: #ff006e;
+            --neon-cyan: #00f5ff;
+            --neon-purple: #b537f2;
+            --neon-yellow: #ffbe0b;
+            --neon-green: #06ffa5;
+            --dark-bg: #0a0e27;
+            --card-bg: #141932;
+            --text-light: #ffffff;
+            --text-muted: #a8b2d1;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { color: var(--dark); line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        body { 
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+            background: var(--dark-bg);
+            position: relative;
+        }
+
+        /* Animated Background Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Floating Orbs */
+        .orb-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: floatOrb 15s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-pink);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 350px;
+            height: 350px;
+            background: var(--neon-cyan);
+            top: 40%;
+            right: -100px;
+            animation-delay: 3s;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: var(--neon-purple);
+            bottom: -100px;
+            left: 40%;
+            animation-delay: 6s;
+        }
+
+        .orb4 {
+            width: 250px;
+            height: 250px;
+            background: var(--neon-yellow);
+            top: 60%;
+            left: 10%;
+            animation-delay: 9s;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 100px) rotate(90deg); }
+            50% { transform: translate(-50px, 150px) rotate(180deg); }
+            75% { transform: translate(-100px, -50px) rotate(270deg); }
+        }
+
+        /* Content wrapper */
+        .content {
+            position: relative;
+            z-index: 1;
+        }
 
         /* Navigation */
-        header { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
-        .logo { font-size: 1.8rem; font-weight: 800; color: white; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: white; font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { opacity: 0.8; }
+        header { 
+            background: rgba(20, 25, 50, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 5px 30px rgba(255, 0, 110, 0.3);
+            border-bottom: 2px solid rgba(255, 0, 110, 0.3);
+        }
+        
+        nav { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 2rem; 
+        }
+        
+        .logo { 
+            font-size: 2rem; 
+            font-weight: 900; 
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .nav-links { 
+            display: flex; 
+            gap: 2.5rem; 
+            list-style: none; 
+        }
+        
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text-light); 
+            font-weight: 600; 
+            transition: all 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 180px 2rem 100px;
+            padding: 200px 2rem 120px;
             text-align: center;
-            border-bottom-left-radius: 50% 5%;
-            border-bottom-right-radius: 50% 5%;
+            position: relative;
+            overflow: hidden;
         }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; font-weight: 800; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
-        .cta-button { background: white; color: var(--primary); padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: bold; transition: 0.3s; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-        .cta-button:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 0, 110, 0.1), transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .hero-badge {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.2), rgba(0, 245, 255, 0.2));
+            border: 2px solid var(--neon-cyan);
+            padding: 8px 24px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero h1 { 
+            font-size: 4.5rem; 
+            margin-bottom: 1.5rem; 
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan), var(--neon-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            line-height: 1.2;
+            text-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+        }
+        
+        .hero p { 
+            font-size: 1.4rem; 
+            margin-bottom: 3rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button { 
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white; 
+            padding: 1.2rem 3.5rem; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            transition: all 0.4s;
+            box-shadow: 0 10px 40px rgba(255, 0, 110, 0.4);
+            border: 2px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover { 
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 0, 110, 0.6);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .cta-secondary:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.6);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: rgba(20, 25, 50, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 40px 2rem;
+            margin: -50px auto 80px;
+            max-width: 1100px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeInUp 0.6s ease backwards;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         /* Container & Grid */
-        .container { max-width: 1200px; margin: 0 auto; padding: 80px 2rem; }
-        .section-title { text-align: center; margin-bottom: 3rem; }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 80px 2rem; 
+        }
+        
+        .section-title { 
+            text-align: center; 
+            margin-bottom: 4rem; 
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
         
         .pricing-grid {
             display: grid;
@@ -52,417 +402,832 @@
 
         /* Card Styles */
         .card {
-            background: white;
+            background: var(--card-bg);
             padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            border: 2px solid transparent;
-            transition: transform 0.3s;
+            transition: all 0.4s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.6s ease backwards;
         }
-        .card:hover { transform: translateY(-10px); border-color: var(--primary); }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:nth-child(1) { 
+            animation-delay: 0.1s;
+            --glow-color: var(--neon-cyan);
+        }
+        .card:nth-child(2) { 
+            animation-delay: 0.2s;
+            --glow-color: var(--neon-purple);
+        }
+        .card:nth-child(3) { 
+            animation-delay: 0.3s;
+            --glow-color: var(--neon-pink);
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
+        }
+        .card:nth-child(4) { 
+            animation-delay: 0.4s;
+            --glow-color: var(--neon-yellow);
+        }
         
-        .badge { position: absolute; top: 20px; right: 20px; background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
-        .badge.popular { background: linear-gradient(45deg, #ff9966, #ff5e62); }
+        .card:hover { 
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--glow-color);
+            box-shadow: 0 20px 60px rgba(255, 0, 110, 0.4);
+        }
         
-        .price { font-size: 2rem; font-weight: bold; color: var(--primary); margin: 1rem 0; }
-        .features-list { list-style: none; margin-bottom: 2rem; color: #666; text-align: left; }
-        .features-list li { margin-bottom: 0.8rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+        .badge { 
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            color: white; 
+            padding: 6px 18px; 
+            border-radius: 25px; 
+            font-size: 0.75rem; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .badge.popular { 
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-yellow));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .price { 
+            font-size: 2.5rem; 
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 1.5rem 0; 
+        }
+        
+        .features-list { 
+            list-style: none; 
+            margin-bottom: 2rem; 
+            color: var(--text-muted); 
+            text-align: left; 
+        }
+        
+        .features-list li { 
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            border-left: 3px solid var(--neon-cyan);
+            transition: all 0.3s;
+        }
+
+        .features-list li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
 
         /* Buttons */
-        .btn { padding: 0.8rem 2rem; border-radius: 12px; cursor: pointer; border: none; font-weight: bold; transition: 0.3s; width: 100%; display: block; text-align: center; font-size: 1rem; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-primary:hover { background: var(--secondary); transform: translateY(-2px); }
-        .btn-outline { background: transparent; border: 2px solid #ddd; color: #666; }
-        .btn-outline:hover { border-color: var(--dark); color: var(--dark); }
+        .btn { 
+            padding: 1rem 2.5rem; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            border: none; 
+            font-weight: 800; 
+            transition: all 0.3s;
+            width: 100%; 
+            display: block; 
+            text-align: center; 
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
+        }
+        
+        .btn-primary:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 0, 110, 0.5);
+        }
+        
+        .btn-outline { 
+            background: transparent; 
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+        }
+        
+        .btn-outline:hover { 
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
 
         /* MODAL STYLES */
         .modal {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
             padding: 1rem;
         }
-        .modal.active { display: flex; animation: fadeIn 0.3s; }
+        
+        .modal.active { 
+            display: flex; 
+            animation: fadeIn 0.3s; 
+        }
+        
         .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 25px;
             width: 100%;
-            max-width: 550px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .close-btn {
             position: absolute;
-            top: 1rem; right: 1rem;
-            background: #f1f1f1; border: none; width: 35px; height: 35px;
-            border-radius: 50%; font-size: 1.2rem; cursor: pointer;
-            color: #666; transition: 0.2s;
+            top: 1.5rem; 
+            right: 1.5rem;
+            background: rgba(255, 0, 110, 0.2);
+            border: 2px solid var(--neon-pink);
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%; 
+            font-size: 1.3rem; 
+            cursor: pointer;
+            color: var(--neon-pink);
+            transition: all 0.3s;
+            font-weight: bold;
         }
-        .close-btn:hover { background: var(--danger); color: white; }
+        
+        .close-btn:hover { 
+            background: var(--neon-pink);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-content h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
 
         /* Add-ons List */
         .addon-item {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem; background: #f8f9fa; border-radius: 12px;
-            margin-bottom: 0.8rem; cursor: pointer; border: 2px solid transparent;
-            transition: 0.2s;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 1.2rem; 
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            margin-bottom: 1rem; 
+            cursor: pointer; 
+            border: 2px solid transparent;
+            transition: all 0.3s;
         }
-        .addon-item:hover { border-color: var(--primary); background: #eef1ff; }
-        .addon-item input { width: 20px; height: 20px; accent-color: var(--primary); margin-right: 1rem; }
+        
+        .addon-item:hover { 
+            border-color: var(--neon-cyan);
+            background: rgba(0, 245, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .addon-item input { 
+            width: 22px; 
+            height: 22px; 
+            accent-color: var(--neon-pink);
+            margin-right: 1rem;
+            cursor: pointer;
+        }
         
         .total-box {
-            background: var(--dark); color: white; padding: 1.2rem;
-            border-radius: 12px; margin: 1.5rem 0; display: flex;
-            justify-content: space-between; font-weight: bold; font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white; 
+            padding: 1.5rem;
+            border-radius: 15px; 
+            margin: 1.5rem 0; 
+            display: flex;
+            justify-content: space-between; 
+            font-weight: 900;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.4);
         }
 
         /* Form Inputs */
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
-        .form-control { width: 100%; padding: 0.8rem; border-radius: 10px; border: 1px solid #ddd; outline: none; background: #fafafa; }
-        .form-control:focus { border-color: var(--primary); background: white; }
-        .btn-group { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .form-group { 
+            margin-bottom: 1.5rem; 
+        }
         
-        .order-summary { background: #e7f3ff; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; border-left: 4px solid var(--primary); font-size: 0.9rem; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-control { 
+            width: 100%; 
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            outline: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus { 
+            border-color: var(--neon-cyan);
+            background: rgba(0, 245, 255, 0.05);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+        
+        .btn-group { 
+            display: flex; 
+            gap: 1rem; 
+            margin-top: 2rem; 
+        }
+        
+        .order-summary { 
+            background: rgba(0, 245, 255, 0.1);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--neon-cyan);
+            font-size: 0.95rem;
+        }
+
+        .selected-package {
+            background: rgba(255, 0, 110, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            border: 2px solid rgba(255, 0, 110, 0.3);
+        }
 
         /* WhatsApp Float & Scroll Top */
-        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; width: 55px; height: 55px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; text-decoration: none; animation: pulse 2s infinite; }
-        .scroll-top { position: fixed; bottom: 85px; right: 20px; width: 45px; height: 45px; background: var(--primary); color: white; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; z-index: 998; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-        .scroll-top.show { display: flex; }
+        .whatsapp-float { 
+            position: fixed; 
+            bottom: 25px; 
+            right: 25px; 
+            width: 65px; 
+            height: 65px; 
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 32px; 
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            z-index: 999; 
+            text-decoration: none; 
+            animation: float 3s ease-in-out infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .scroll-top { 
+            position: fixed; 
+            bottom: 100px; 
+            right: 25px; 
+            width: 50px; 
+            height: 50px; 
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white; 
+            border-radius: 50%; 
+            display: none;
+            align-items: center; 
+            justify-content: center; 
+            font-size: 22px; 
+            cursor: pointer; 
+            z-index: 998; 
+            box-shadow: 0 6px 20px rgba(255, 0, 110, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .scroll-top.show { 
+            display: flex;
+            animation: fadeInUp 0.4s;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.6);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--card-bg);
+            padding: 80px 2rem;
+            text-align: center;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-section h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.05);
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 2.5rem;
+            transition: all 0.4s;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-btn::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--btn-color) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .social-btn:hover::before {
+            opacity: 0.3;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-15px) scale(1.15) rotate(10deg);
+            background: white;
+            border-color: var(--btn-color);
+            box-shadow: 0 15px 40px var(--btn-shadow);
+        }
+
+        .social-btn.wa { --btn-color: #25D366; --btn-shadow: rgba(37, 211, 102, 0.6); }
+        .social-btn.email { --btn-color: #EA4335; --btn-shadow: rgba(234, 67, 53, 0.6); }
+        .social-btn.ig { --btn-color: #E1306C; --btn-shadow: rgba(225, 48, 108, 0.6); }
+
+        .social-btn.wa:hover { color: #25D366; }
+        .social-btn.email:hover { color: #EA4335; }
+        .social-btn.ig:hover { color: #E1306C; }
         
         /* Footer */
-        footer { background: #333; color: white; text-align: center; padding: 2rem; margin-top: 2rem; }
+        footer { 
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-muted);
+            text-align: center; 
+            padding: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
+        footer p {
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.1rem; }
             .pricing-grid { grid-template-columns: 1fr; }
             .btn-group { flex-direction: column-reverse; }
+            .stats-bar { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+            .stat-item { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1rem; }
+            .stat-item:last-child { border-bottom: none; }
+            .social-btn { width: 65px; height: 65px; font-size: 2rem; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-pink), var(--neon-purple));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink));
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <nav>
-            <div class="logo">DigiJam</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#pricing">Paket & Harga</a></li>
-                <li><a href="#contact">Kontak</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-badge" style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; display: inline-block; margin-bottom: 1rem;">✨ Professional Photography & Videography</div>
-        <h1>Your Moments, Perfectly Captured</h1>
-        <p>Jasa Dokumentasi Terbaik di Kranji, Bekasi Barat</p>
-        <a href="#pricing" class="cta-button">Booking Sekarang</a>
-    </section>
-
-    <div id="pricing" class="container">
-        <div class="section-title">
-            <h2>Pilih Paket</h2>
-            <p>Pilih paket, lalu tambahkan Add-ons sesuai kebutuhan</p>
-        </div>
-
-        <div class="pricing-grid">
-            <div class="card">
-                <div class="badge">Hemat</div>
-                <div>
-                    <h3>PAKET A</h3>
-                    <div class="price">Rp 25.000</div>
-                    <ul class="features-list">
-                        <li>📸 5 foto + 2 menit sesi</li>
-                        <li>🎨 Resolusi HD</li>
-                        <li>⚡ Softcopy only</li>
-                    </ul>
-                </div>
-                <button onclick="openAddons('Paket A', 25000)" class="btn btn-primary">Pilih Paket</button>
-            </div>
-
-            <div class="card">
-                <div class="badge">Basic</div>
-                <div>
-                    <h3>PAKET B</h3>
-                    <div class="price">Rp 50.000</div>
-                    <ul class="features-list">
-                        <li>📸 10 foto + 8 menit sesi</li>
-                        <li>✨ Editing foto profesional</li>
-                        <li>🎨 Resolusi HD</li>
-                        <li>🔄 2 kali revisi</li>
-                        <li>☁️ Via Google Drive</li>
-                    </ul>
-                </div>
-                <button onclick="openAddons('Paket B', 50000)" class="btn btn-primary">Pilih Paket</button>
-            </div>
-
-            <div class="card" style="border-color: var(--primary); background: linear-gradient(to bottom, #fff, #f8f9ff);">
-                <div class="badge popular">Popular</div>
-                <div>
-                    <h3>PAKET C</h3>
-                    <div class="price">Rp 75.000</div>
-                    <ul class="features-list">
-                        <li>📸 15 foto + 10 menit sesi</li>
-                        <li>🎥 Video pendek (30-45 detik)</li>
-                        <li>✨ Editing foto (15 foto)</li>
-                        <li>🎬 Editing video basic</li>
-                        <li>🔄 2 kali revisi</li>
-                    </ul>
-                </div>
-                <button onclick="openAddons('Paket C', 75000)" class="btn btn-primary">Pilih Paket</button>
-            </div>
-
-            <div class="card">
-                <div class="badge" style="background: #764ba2;">Premium</div>
-                <div>
-                    <h3>PAKET D</h3>
-                    <div class="price">Rp 100.000</div>
-                    <ul class="features-list">
-                        <li>📸 20 foto + 15 menit sesi</li>
-                        <li>🎥 Video cinematic (1 menit)</li>
-                        <li>✨ Editing foto (20 foto)</li>
-                        <li>🎵 Musik + transition</li>
-                        <li>🔄 3 kali revisi</li>
-                    </ul>
-                </div>
-                <button onclick="openAddons('Paket D', 100000)" class="btn btn-primary">Pilih Paket</button>
-            </div>
-        </div>
+    <!-- Background Effects -->
+    <div class="bg-grid"></div>
+    <div class="orb-container">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="orb orb4"></div>
     </div>
 
-    <div class="modal" id="addonsModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeAllModals()">&times;</button>
-            
-            <h3 style="color: var(--primary);">Pilih Add-ons (Opsional)</h3>
-            <p style="margin-bottom: 1.5rem; color: #666;">Lengkapi paket Anda dengan layanan tambahan:</p>
-            
-            <div class="selected-package" style="background: #eee; padding: 10px; border-radius: 8px; margin-bottom: 1rem; font-weight: bold;">
-                Paket: <span id="selectedPackageName" style="color: var(--primary);"></span>
+    <div class="content">
+        <header>
+            <nav>
+                <div class="logo">⚡ DigiJam</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#pricing">Paket</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section id="home" class="hero">
+            <div class="hero-badge">✨ Professional Photography & Videography</div>
+            <h1>Your Moments,<br>Perfectly Captured</h1>
+            <p>Jasa Dokumentasi Terbaik di Kranji, Bekasi Barat</p>
+            <div class="hero-buttons">
+                <a href="#pricing" class="cta-button">🎯 Booking Sekarang</a>
+                <a href="#contact" class="cta-button cta-secondary">💬 Chat Kami</a>
             </div>
+        </section>
 
-            <div id="addonsList">
-                <label class="addon-item">
-                    <div style="display: flex; align-items: center;">
-                        <input type="checkbox" class="addon-cb" data-name="Extra editing foto (5 foto)" data-price="10000">
-                        <span>Extra editing foto (5 foto)</span>
-                    </div>
-                    <span style="font-weight: bold; color: var(--primary);">+10rb</span>
-                </label>
-
-                <label class="addon-item">
-                    <div style="display: flex; align-items: center;">
-                        <input type="checkbox" class="addon-cb" data-name="Extra durasi video (30 detik)" data-price="15000">
-                        <span>Extra durasi video (30 detik)</span>
-                    </div>
-                    <span style="font-weight: bold; color: var(--primary);">+15rb</span>
-                </label>
-
-                <label class="addon-item">
-                    <div style="display: flex; align-items: center;">
-                        <input type="checkbox" class="addon-cb" data-name="File tanpa watermark" data-price="0">
-                        <span>File tanpa watermark</span>
-                    </div>
-                    <span style="font-weight: bold; color: #28a745;">Gratis</span>
-                </label>
-
-                <label class="addon-item">
-                    <div style="display: flex; align-items: center;">
-                        <input type="checkbox" class="addon-cb" data-name="Express 1 hari" data-price="20000">
-                        <span>Cepat jadi (Express 1 hari)</span>
-                    </div>
-                    <span style="font-weight: bold; color: var(--primary);">+20rb</span>
-                </label>
-
-                <label class="addon-item">
-                    <div style="display: flex; align-items: center;">
-                        <input type="checkbox" class="addon-cb" data-name="Tambah soft file/foto" data-price="2000">
-                        <span>Tambah soft file (per foto)</span>
-                    </div>
-                    <span style="font-weight: bold; color: var(--primary);">+2rb</span>
-                </label>
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number" id="clientCount">0</div>
+                <div class="stat-label">Happy Clients</div>
             </div>
-
-            <div class="total-box">
-                <span>Total Estimasi</span>
-                <span id="totalDisplay">Rp 0</span>
+            <div class="stat-item">
+                <div class="stat-number" id="projectCount">0</div>
+                <div class="stat-label">Projects Done</div>
             </div>
-
-            <button onclick="goToForm()" class="btn btn-primary">Lanjut ke Booking <i class="fas fa-arrow-right"></i></button>
+            <div class="stat-item">
+                <div class="stat-number" id="currentTime">00:00</div>
+                <div class="stat-label">Time Now</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5★</div>
+                <div class="stat-label">Rating</div>
+            </div>
         </div>
-    </div>
 
-    <div class="modal" id="formModal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeAllModals()">&times;</button>
-            
-            <h3 style="color: var(--primary);">Formulir Booking</h3>
-            
-            <div class="order-summary">
-                <strong>Ringkasan Pesanan:</strong><br>
-                <span id="summaryText">Loading...</span>
+        <div id="pricing" class="container">
+            <div class="section-title">
+                <h2>💎 Pilih Paket</h2>
+                <p>Pilih paket, lalu tambahkan Add-ons sesuai kebutuhan</p>
             </div>
 
-            <form id="bookingForm">
-                <div class="form-group">
-                    <label>Nama Lengkap *</label>
-                    <input type="text" id="name" class="form-control" required placeholder="Nama Anda">
+            <div class="pricing-grid">
+                <div class="card">
+                    <div class="badge">Hemat</div>
+                    <div>
+                        <h3>PAKET A</h3>
+                        <div class="price">Rp 25K</div>
+                        <ul class="features-list">
+                            <li>📸 5 foto + 2 menit sesi</li>
+                            <li>🎨 Resolusi HD</li>
+                            <li>⚡ Softcopy only</li>
+                        </ul>
+                    </div>
+                    <button onclick="openAddons('Paket A', 25000)" class="btn btn-primary">Pilih Paket</button>
                 </div>
+
+                <div class="card">
+                    <div class="badge">Basic</div>
+                    <div>
+                        <h3>PAKET B</h3>
+                        <div class="price">Rp 50K</div>
+                        <ul class="features-list">
+                            <li>📸 10 foto + 8 menit sesi</li>
+                            <li>✨ Editing foto profesional</li>
+                            <li>🎨 Resolusi HD</li>
+                            <li>🔄 2 kali revisi</li>
+                            <li>☁️ Via Google Drive</li>
+                        </ul>
+                    </div>
+                    <button onclick="openAddons('Paket B', 50000)" class="btn btn-primary">Pilih Paket</button>
+                </div>
+
+                <div class="card">
+                    <div class="badge popular">⭐ Popular</div>
+                    <div>
+                        <h3>PAKET C</h3>
+                        <div class="price">Rp 75K</div>
+                        <ul class="features-list">
+                            <li>📸 15 foto + 10 menit sesi</li>
+                            <li>🎥 Video pendek (30-45 detik)</li>
+                            <li>✨ Editing foto (15 foto)</li>
+                            <li>🎬 Editing video basic</li>
+                            <li>🔄 2 kali revisi</li>
+                        </ul>
+                    </div>
+                    <button onclick="openAddons('Paket C', 75000)" class="btn btn-primary">Pilih Paket</button>
+                </div>
+
+                <div class="card">
+                    <div class="badge" style="background: linear-gradient(135deg, var(--neon-yellow), var(--neon-green));">Premium</div>
+                    <div>
+                        <h3>PAKET D</h3>
+                        <div class="price">Rp 100K</div>
+                        <ul class="features-list">
+                            <li>📸 20 foto + 15 menit sesi</li>
+                            <li>🎥 Video cinematic (1 menit)</li>
+                            <li>✨ Editing foto (20 foto)</li>
+                            <li>🎵 Musik + transition</li>
+                            <li>🔄 3 kali revisi</li>
+                        </ul>
+                    </div>
+                    <button onclick="openAddons('Paket D', 100000)" class="btn btn-primary">Pilih Paket</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Add-ons -->
+        <div class="modal" id="addonsModal">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
                 
-                <div class="form-group">
-                    <label>Nomor WhatsApp *</label>
-                    <input type="tel" id="whatsapp" class="form-control" required placeholder="08xx-xxxx-xxxx">
+                <h3>🎁 Pilih Add-ons</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Lengkapi paket Anda dengan layanan tambahan:</p>
+                
+                <div class="selected-package">
+                    Paket: <span id="selectedPackageName" style="color: var(--neon-cyan);"></span>
                 </div>
 
-                <div class="form-group">
-                    <label>Email *</label>
-                    <input type="email" id="email" class="form-control" required placeholder="email@contoh.com">
+                <div id="addonsList">
+                    <label class="addon-item">
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" class="addon-cb" data-name="Extra editing foto (5 foto)" data-price="10000">
+                            <span>Extra editing foto (5 foto)</span>
+                        </div>
+                        <span style="font-weight: bold; color: var(--neon-pink);">+10rb</span>
+                    </label>
+
+                    <label class="addon-item">
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" class="addon-cb" data-name="Extra durasi video (30 detik)" data-price="15000">
+                            <span>Extra durasi video (30 detik)</span>
+                        </div>
+                        <span style="font-weight: bold; color: var(--neon-pink);">+15rb</span>
+                    </label>
+
+                    <label class="addon-item">
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" class="addon-cb" data-name="File tanpa watermark" data-price="0">
+                            <span>File tanpa watermark</span>
+                        </div>
+                        <span style="font-weight: bold; color: var(--neon-green);">Gratis</span>
+                    </label>
+
+                    <label class="addon-item">
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" class="addon-cb" data-name="Express 1 hari" data-price="20000">
+                            <span>⚡ Cepat jadi (Express 1 hari)</span>
+                        </div>
+                        <span style="font-weight: bold; color: var(--neon-pink);">+20rb</span>
+                    </label>
+
+                    <label class="addon-item">
+                        <div style="display: flex; align-items: center;">
+                            <input type="checkbox" class="addon-cb" data-name="Tambah soft file/foto" data-price="2000">
+                            <span>Tambah soft file (per foto)</span>
+                        </div>
+                        <span style="font-weight: bold; color: var(--neon-pink);">+2rb</span>
+                    </label>
                 </div>
 
-                <div class="form-group">
-                    <label>Jenis Layanan *</label>
-                    <select id="layanan" class="form-control" required>
-                        <option value="Self Photo Studio">Self Photo Studio</option>
-                        <option value="Fashion Photoshoot">Fashion Photoshoot</option>
-                        <option value="Lookbook Photoshoot">Lookbook Photoshoot</option>
-                        <option value="Product Photography">Product Photography</option>
-                        <option value="Content Creation">Content Creation</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
+                <div class="total-box">
+                    <span>💰 Total Estimasi</span>
+                    <span id="totalDisplay">Rp 0</span>
                 </div>
 
-                <div class="form-group">
-                    <label>Tanggal Acara *</label>
-                    <input type="date" id="date" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Lokasi *</label>
-                    <input type="text" id="lokasi" class="form-control" required placeholder="Alamat / Lokasi">
-                </div>
-
-                <div class="form-group">
-                    <label>Durasi Liputan *</label>
-                    <select id="durasi" class="form-control" required>
-                        <option value="2-4 jam">2-4 jam</option>
-                        <option value="4-6 jam">4-6 jam</option>
-                        <option value="6-8 jam">6-8 jam</option>
-                        <option value="Full day">Full day</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Catatan Tambahan</label>
-                    <textarea id="catatan" class="form-control" rows="3" placeholder="Permintaan khusus..."></textarea>
-                </div>
-
-                <div class="btn-group">
-                    <button type="button" onclick="backToAddons()" class="btn btn-outline">
-                        <i class="fas fa-arrow-left"></i> Kembali
-                    </button>
-                    <button type="button" onclick="checkout()" class="btn btn-primary" style="background: var(--success);">
-                        <i class="fab fa-whatsapp"></i> Kirim Booking
-                    </button>
-                </div>
-            </form>
+                <button onclick="goToForm()" class="btn btn-primary">Lanjut ke Booking <i class="fas fa-arrow-right"></i></button>
+            </div>
         </div>
-    </div>
 
-    <section id="contact" style="background: #333; color: white; padding: 60px 2rem; text-align: center;">
-        <h2 style="margin-bottom: 2.5rem; font-weight: 700;">Hubungi Kami</h2>
-        
-        <div class="social-container">
+        <!-- Modal Form -->
+        <div class="modal" id="formModal">
+            <div class="modal-content">
+                <button class="close-btn" onclick="closeAllModals()">&times;</button>
+                
+                <h3>📋 Formulir Booking</h3>
+                
+                <div class="order-summary">
+                    <strong>📦 Ringkasan Pesanan:</strong><br>
+                    <span id="summaryText">Loading...</span>
+                </div>
+
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label>👤 Nama Lengkap *</label>
+                        <input type="text" id="name" class="form-control" required placeholder="Nama Anda">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>📱 Nomor WhatsApp *</label>
+                        <input type="tel" id="whatsapp" class="form-control" required placeholder="08xx-xxxx-xxxx">
+                    </div>
+
+                    <div class="form-group">
+                        <label>📧 Email *</label>
+                        <input type="email" id="email" class="form-control" required placeholder="email@contoh.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>🎬 Jenis Layanan *</label>
+                        <select id="layanan" class="form-control" required>
+                            <option value="Self Photo Studio">Self Photo Studio</option>
+                            <option value="Fashion Photoshoot">Fashion Photoshoot</option>
+                            <option value="Lookbook Photoshoot">Lookbook Photoshoot</option>
+                            <option value="Product Photography">Product Photography</option>
+                            <option value="Content Creation">Content Creation</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📅 Tanggal Acara *</label>
+                        <input type="date" id="date" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📍 Lokasi *</label>
+                        <input type="text" id="lokasi" class="form-control" required placeholder="Alamat / Lokasi">
+                    </div>
+
+                    <div class="form-group">
+                        <label>⏱ Durasi Liputan *</label>
+                        <select id="durasi" class="form-control" required>
+                            <option value="2-4 jam">2-4 jam</option>
+                            <option value="4-6 jam">4-6 jam</option>
+                            <option value="6-8 jam">6-8 jam</option>
+                            <option value="Full day">Full day</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📝 Catatan Tambahan</label>
+                        <textarea id="catatan" class="form-control" rows="3" placeholder="Permintaan khusus..."></textarea>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" onclick="backToAddons()" class="btn btn-outline">
+                            <i class="fas fa-arrow-left"></i> Kembali
+                        </button>
+                        <button type="button" onclick="checkout()" class="btn btn-primary" style="background: linear-gradient(135deg, #25D366, #128C7E);">
+                            <i class="fab fa-whatsapp"></i> Kirim Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <h2>📞 Hubungi Kami</h2>
             
-            <a href="https://wa.me/6285723668508" target="_blank" class="social-btn wa" title="Chat WhatsApp">
-                <i class="fab fa-whatsapp"></i>
-            </a>
+            <div class="social-container">
+                <a href="https://wa.me/6285723668508" target="_blank" class="social-btn wa" title="Chat WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
 
-            <a href="mailto:dgijamdgjum@gmail.com" class="social-btn email" title="Kirim Email">
-                <i class="fas fa-envelope"></i>
-            </a>
+                <a href="mailto:dgijamdgjum@gmail.com" class="social-btn email" title="Kirim Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
 
-            <a href="https://instagram.com/digijam__" target="_blank" class="social-btn ig" title="Cek Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
+                <a href="https://instagram.com/digijam__" target="_blank" class="social-btn ig" title="Cek Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </section>
 
-        </div>
-
-        <style>
-            .social-container {
-                display: flex;
-                justify-content: center;
-                gap: 2rem; /* Jarak antar logo */
-                align-items: center;
-                flex-wrap: wrap;
-            }
-
-            .social-btn {
-                background: rgba(255,255,255,0.1); /* Latar belakang transparan */
-                width: 70px;
-                height: 70px;
-                border-radius: 50%; /* Bentuk bulat */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                color: white;
-                font-size: 2rem; /* Ukuran logo */
-                transition: all 0.3s ease;
-                border: 2px solid transparent;
-            }
-
-            /* Efek Hover (Saat disentuh/mouse) */
-            .social-btn:hover {
-                transform: translateY(-10px) scale(1.1); /* Naik ke atas & membesar */
-                background: white; /* Background jadi putih */
-            }
-
-            /* Warna Khusus saat Hover */
-            .social-btn.wa:hover { color: #25D366; box-shadow: 0 0 20px rgba(37, 211, 102, 0.6); }
-            .social-btn.email:hover { color: #EA4335; box-shadow: 0 0 20px rgba(234, 67, 53, 0.6); }
-            .social-btn.ig:hover { color: #E1306C; box-shadow: 0 0 20px rgba(225, 48, 108, 0.6); }
-
-            /* Tampilan Mobile */
-            @media (max-width: 480px) {
-                .social-btn {
-                    width: 55px;
-                    height: 55px;
-                    font-size: 1.5rem;
-                    gap: 1.5rem;
-                }
-            }
-        </style>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 DigiJam. Melayani area Kranji, Bekasi Barat.</p>
-    </footer>
+        <footer>
+            <p>⚡ &copy; 2024 DigiJam. Melayani area Kranji, Bekasi Barat.</p>
+        </footer>
+    </div>
 
     <a href="https://wa.me/6285723668508" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
     <div class="scroll-top" id="scrollTop" onclick="window.scrollTo(0,0)"><i class="fas fa-arrow-up"></i></div>
 
     <script>
+        // --- REALTIME STATS COUNTER ---
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+
+        // Realtime clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('currentTime').textContent = `${hours}:${minutes}`;
+        }
+
+        // Initialize counters when page loads
+        window.addEventListener('load', () => {
+            animateCounter(document.getElementById('clientCount'), 50); // 50+ clients (lebih realistis)
+            animateCounter(document.getElementById('projectCount'), 120); // 120+ projects (lebih realistis)
+            updateClock();
+            setInterval(updateClock, 1000); // Update clock every second
+        });
+
         // --- LOGIC ---
         let currentPackage = { name: '', price: 0 };
         let currentTotal = 0;
@@ -509,7 +1274,7 @@
             
             document.getElementById('summaryText').innerHTML = `
                 ${summary} <br>
-                <div style="margin-top:10px; border-top:1px dashed #999; paddingTop:5px">
+                <div style="margin-top:10px; border-top:1px dashed #999; padding-top:5px">
                     Total Estimasi: <strong>Rp ${currentTotal.toLocaleString('id-ID')}</strong>
                 </div>
             `;
@@ -563,7 +1328,16 @@
             window.open(`https://wa.me/6285723668508?text=${encodeURIComponent(msg)}`, '_blank');
             closeAllModals();
         }
+
+        // Parallax effect for orbs on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const orbs = document.querySelectorAll('.orb');
+            orbs.forEach((orb, index) => {
+                const speed = (index + 1) * 0.05;
+                orb.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
     </script>
 </body>
 </html>
-
