@@ -1108,6 +1108,146 @@
 
         .burst-label { font-size: 0.85rem; }
 
+
+        /* ===== EYE CREATURE ===== */
+        .eye-creature {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 800;
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .eye-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .eye-socket {
+            width: 56px;
+            height: 56px;
+            background: var(--ink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eye-ball {
+            width: 38px;
+            height: 38px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eye-pupil {
+            width: 18px;
+            height: 18px;
+            background: var(--ink);
+            border-radius: 50%;
+            position: absolute;
+            transition: transform 0.06s linear;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eye-shine {
+            width: 5px;
+            height: 5px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            right: 3px;
+        }
+
+        /* Eyelid — covers ball when blinking */
+        .eye-lid {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--ink);
+            border-radius: 0 0 50% 50%;
+            transition: top 0.08s ease-in;
+        }
+        .eye-lid.blink {
+            top: 0;
+            transition: top 0.06s ease-in;
+        }
+        .eye-lid.open {
+            top: -100%;
+            transition: top 0.1s ease-out;
+        }
+
+        /* Little legs */
+        .eye-legs {
+            display: flex;
+            gap: 10px;
+            margin-top: 2px;
+        }
+        .eye-leg {
+            width: 3px;
+            height: 12px;
+            background: var(--ink);
+            border-radius: 2px;
+            transform-origin: top center;
+            animation: legWiggle 0.8s ease-in-out infinite alternate;
+        }
+        .eye-leg:nth-child(1) { animation-delay: 0s;    transform: rotate(-15deg); }
+        .eye-leg:nth-child(2) { animation-delay: 0.15s; }
+        .eye-leg:nth-child(3) { animation-delay: 0.3s;  transform: rotate(15deg); }
+
+        @keyframes legWiggle {
+            from { transform: scaleY(1); }
+            to   { transform: scaleY(0.75); }
+        }
+
+
+        /* SPEECH BUBBLE */
+        .eye-speech {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ink);
+            color: var(--paper);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            white-space: nowrap;
+            padding: 6px 12px;
+            border-radius: 20px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 10;
+        }
+        .eye-speech::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid var(--ink);
+        }
+        .eye-speech.show {
+            opacity: 1;
+        }
         /* Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--paper); }
@@ -1687,6 +1827,189 @@
         el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         observer.observe(el);
     });
+
 </script>
+
+<!-- EYE CREATURE -->
+<div class="eye-creature" id="eyeCreature">
+    <div class="eye-speech" id="eyeSpeech"></div>
+    <div class="eye-body">
+        <div class="eye-socket">
+            <div class="eye-ball" id="eyeBall">
+                <div class="eye-pupil" id="eyePupil">
+                    <div class="eye-shine"></div>
+                </div>
+                <div class="eye-lid" id="eyeLid"></div>
+            </div>
+        </div>
+        <div class="eye-legs">
+            <div class="eye-leg"></div>
+            <div class="eye-leg"></div>
+            <div class="eye-leg"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Eye creature — wanders randomly, flees cursor when close
+(function() {
+    const creature = document.getElementById('eyeCreature');
+    const pupil    = document.getElementById('eyePupil');
+    const lid      = document.getElementById('eyeLid');
+
+    if (!creature || !pupil || !lid) return;
+
+    const SIZE     = 80;
+    const FLEE_R   = 160; // flee radius in px
+    const MARGIN   = SIZE + 20;
+
+    let cx = 80, cy = window.innerHeight - 150;
+    let tx = cx,  ty = cy;
+    let mouseX = -999, mouseY = -999;
+    let fleeing = false;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    // random wander target
+    function pickNewTarget() {
+        // only pick new random target if not fleeing
+        if (!fleeing) {
+            tx = MARGIN + Math.random() * (window.innerWidth  - MARGIN * 2);
+            ty = MARGIN + Math.random() * (window.innerHeight - MARGIN * 2);
+        }
+        setTimeout(pickNewTarget, 2000 + Math.random() * 2000);
+    }
+    pickNewTarget();
+
+    // pupil wanders independently
+    var px = 0, py = 0, ptx = 0, pty = 0;
+    function pickPupilTarget() {
+        ptx = (Math.random() * 2 - 1) * 5;
+        pty = (Math.random() * 2 - 1) * 5;
+        setTimeout(pickPupilTarget, 800 + Math.random() * 1200);
+    }
+    pickPupilTarget();
+
+    function clamp(val, min, max) {
+        return Math.max(min, Math.min(max, val));
+    }
+
+    var speechEl = document.getElementById('eyeSpeech');
+    var fleeWords = [
+        'tidaaaak!', 'jangan dekati aku!', 'jangan sentuh aku!',
+        'apaan sih ngejar-ngejar', 'hiiih pergi!', 'aku takuuut!'
+    ];
+    var speechTimer = null;
+    var speechHideTimer = null;
+
+    function pauseIdle() {
+        clearTimeout(idleTimer);
+        speechEl.classList.remove('show');
+    }
+    function resumeIdle() {
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(showIdle, 2500 + Math.random() * 2000);
+    }
+
+    function showSpeech() {
+        if (!speechEl) return;
+        clearTimeout(speechTimer);
+        clearTimeout(speechHideTimer);
+        var word = fleeWords[Math.floor(Math.random() * fleeWords.length)];
+        speechEl.textContent = word;
+        speechEl.classList.add('show');
+        // hide after 1.8s
+        speechHideTimer = setTimeout(function() {
+            speechEl.classList.remove('show');
+            // show another if still fleeing
+            speechTimer = setTimeout(function() {
+                if (fleeing) showSpeech();
+            }, 400);
+        }, 1800);
+    }
+
+    function hideSpeech() {
+        if (!speechEl) return;
+        clearTimeout(speechTimer);
+        clearTimeout(speechHideTimer);
+        speechEl.classList.remove('show');
+    }
+
+    // idle speech
+    var idleWords = [
+        'hallo! 👋', 'selamat datang di toko kami!',
+        'nama kamu siapa?', 'dipilih paketnya kak~',
+        'harganya murah kak!', 'mau foto? ayo booking!'
+    ];
+    var idleTimer = null;
+
+    function showIdle() {
+        if (fleeing) return;
+        var word = idleWords[Math.floor(Math.random() * idleWords.length)];
+        speechEl.textContent = word;
+        speechEl.classList.add('show');
+        idleTimer = setTimeout(function() {
+            speechEl.classList.remove('show');
+            idleTimer = setTimeout(showIdle, 3000 + Math.random() * 3000);
+        }, 2500);
+    }
+    setTimeout(showIdle, 2000);
+
+        function loop() {
+        // distance from cursor to creature center
+        var ecx  = cx + SIZE / 2;
+        var ecy  = cy + SIZE / 2;
+        var dx   = ecx - mouseX;
+        var dy   = ecy - mouseY;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < FLEE_R && dist > 0) {
+            // flee: push target away from cursor, scaled by proximity
+            if (!fleeing) { showSpeech(); pauseIdle(); }
+            fleeing = true;
+            var force  = (FLEE_R - dist) / FLEE_R;
+            var speed  = 300 * force;
+            tx = clamp(cx + (dx / dist) * speed, MARGIN, window.innerWidth  - MARGIN);
+            ty = clamp(cy + (dy / dist) * speed, MARGIN, window.innerHeight - MARGIN);
+        } else {
+            if (fleeing) { hideSpeech(); resumeIdle(); }
+            fleeing = false;
+        }
+
+        // lerp — faster when fleeing, lazy when wandering
+        var lerpSpeed = fleeing ? 0.1 : 0.02;
+        cx += (tx - cx) * lerpSpeed;
+        cy += (ty - cy) * lerpSpeed;
+        creature.style.transform = 'translate(' + cx + 'px, ' + cy + 'px)';
+
+        // pupil
+        px += (ptx - px) * 0.08;
+        py += (pty - py) * 0.08;
+        pupil.style.transform = 'translate(' + px + 'px, ' + py + 'px)';
+
+        requestAnimationFrame(loop);
+    }
+    loop();
+
+    // random blink
+    function blink() {
+        lid.classList.add('blink');
+        setTimeout(function() { lid.classList.remove('blink'); lid.classList.add('open'); }, 120);
+        setTimeout(function() { lid.classList.remove('open'); }, 230);
+        if (Math.random() < 0.3) {
+            setTimeout(function() {
+                lid.classList.add('blink');
+                setTimeout(function() { lid.classList.remove('blink'); }, 100);
+            }, 380);
+        }
+        setTimeout(blink, 1500 + Math.random() * 3500);
+    }
+    setTimeout(blink, 800);
+})();
+</script>
+
 </body>
 </html>
