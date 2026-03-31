@@ -1115,8 +1115,19 @@
             top: 0;
             left: 0;
             z-index: 800;
-            pointer-events: none;
+            pointer-events: all;
             will-change: transform;
+            cursor: pointer;
+        }
+        .eye-creature.scared {
+            animation: scaredShake 0.4s ease;
+        }
+        @keyframes scaredShake {
+            0%,100% { transform: rotate(0deg); }
+            20% { transform: rotate(-8deg) scale(1.15); }
+            40% { transform: rotate(8deg) scale(1.2); }
+            60% { transform: rotate(-6deg) scale(1.1); }
+            80% { transform: rotate(4deg) scale(1.05); }
         }
 
         .eye-body {
@@ -1219,7 +1230,7 @@
         /* SPEECH BUBBLE */
         .eye-speech {
             position: absolute;
-            bottom: 70px;
+            bottom: 75px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--ink);
@@ -1228,12 +1239,13 @@
             font-size: 0.72rem;
             font-weight: 700;
             white-space: nowrap;
-            padding: 6px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.2s;
             z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
         .eye-speech::after {
             content: '';
@@ -1900,7 +1912,10 @@
     var speechEl = document.getElementById('eyeSpeech');
     var fleeWords = [
         'tidaaaak!', 'jangan dekati aku!', 'jangan sentuh aku!',
-        'apaan sih ngejar-ngejar', 'hiiih pergi!', 'aku takuuut!'
+        'apaan sih ngejar-ngejar', 'hiiih pergi!', 'aku takuuut!',
+        'tolong!!', 'aaaaaa!!', 'ampuuun!', 'kenapa sih?!',
+        'usil banget deh!', 'pergi pergi pergi!',
+        'aku mau kabur!', 'jauhin aku!', 'pliss jangan~'
     ];
     var speechTimer = null;
     var speechHideTimer = null;
@@ -1913,6 +1928,32 @@
         clearTimeout(idleTimer);
         idleTimer = setTimeout(showIdle, 2500 + Math.random() * 2000);
     }
+
+    // click reaction
+    var clickWords = [
+        'aduh! 😖', 'sakiiit!', 'hei jangan dipencet!',
+        'apa-apaan sih?!', 'kurang ajar!', 'aw aw aw!',
+        'stop stop stop!', 'ya ampuuun~', 'kenapa dipencet?!',
+        'itu sakit tau!', 'geli tau gak!'
+    ];
+    creature.addEventListener('click', function() {
+        pauseIdle();
+        var word = clickWords[Math.floor(Math.random() * clickWords.length)];
+        speechEl.textContent = word;
+        speechEl.classList.add('show');
+        creature.classList.remove('scared');
+        void creature.offsetWidth; // reflow to restart animation
+        creature.classList.add('scared');
+        // bounce away
+        var angle = Math.random() * Math.PI * 2;
+        tx = Math.max(MARGIN, Math.min(window.innerWidth - MARGIN, cx + Math.cos(angle) * 250));
+        ty = Math.max(MARGIN, Math.min(window.innerHeight - MARGIN, cy + Math.sin(angle) * 250));
+        setTimeout(function() {
+            creature.classList.remove('scared');
+            speechEl.classList.remove('show');
+            resumeIdle();
+        }, 2000);
+    });
 
     function showSpeech() {
         if (!speechEl) return;
@@ -1942,7 +1983,15 @@
     var idleWords = [
         'hallo! 👋', 'selamat datang di toko kami!',
         'nama kamu siapa?', 'dipilih paketnya kak~',
-        'harganya murah kak!', 'mau foto? ayo booking!'
+        'harganya murah kak!', 'mau foto? ayo booking!',
+        'psst.. ada promo nih 👀', 'jangan lupa follow @digijam__',
+        'kamera kami siap buat kamu!', 'yuk konsultasi dulu~',
+        'foto produk juga bisa lho!', 'kualitas HD garansi puas!',
+        'paket C lagi hits banget nih', 'buruan book sebelum kehabisan!',
+        'editing-nya cakep banget deh', '*kedip kedip*',
+        'hei kamu, iya kamu!', 'lagi cari fotografer?',
+        'aku bisa bantu lho 😊', 'WA aja langsung kak!',
+        'free konsultasi kok~', 'express 1 hari juga bisa!'
     ];
     var idleTimer = null;
 
